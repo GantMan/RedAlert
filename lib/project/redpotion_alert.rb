@@ -30,9 +30,9 @@ module RubyMotionQuery
         cancelButtonTitle: opts[:cancel_button],
         otherButtonTitles: nil
       )
-      Array(other_buttons).each { |button| alert_view.addButtonWithTitle(button) }
+      Array(opts[:other_buttons]).each { |button| alert_view.addButtonWithTitle(button) }
 
-      alert_view.alertViewStyle = view_style
+      alert_view.alertViewStyle = opts[:view_style]
 
       alert_view.show
       rmq(alert_view)
@@ -49,7 +49,7 @@ module RubyMotionQuery
       if rmq.device.ios_at_least? 8
 
       else
-
+        alert_view(opts)
       end
     end
   end

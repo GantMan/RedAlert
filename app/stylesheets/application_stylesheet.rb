@@ -26,4 +26,10 @@ class ApplicationStylesheet < RubyMotionQuery::Stylesheet
     color.add_named :battleship_gray,   '#7F7F7F'
   end
 
+  def basic_button st
+    st.frame = {t: 100, l: 10, w: screen_width - 20, h: 30, centered: :horizontal}
+    st.corner_radius = 5
+    st.background_color = color.blue
+  end
+
 end
