@@ -2,7 +2,9 @@
 
 # redpotion_alert
 
-TODO: Write a plugin description
+**Did you know that UIAlertView and UIActionSheet (as well as their respective delegate protocols) are deprecated in iOS 8?**
+
+`UIAlertController` is used in this gem.   Gracefully falls back to `UIAlertView` for versions older than iOS8
 
 ## Installation
 
