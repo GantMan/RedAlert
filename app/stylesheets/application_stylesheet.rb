@@ -27,7 +27,7 @@ class ApplicationStylesheet < RubyMotionQuery::Stylesheet
   end
 
   def basic_button st
-    st.frame = {t: 100, l: 10, w: screen_width - 20, h: 30, centered: :horizontal}
+    st.frame = {bp: 5, l: 10, w: screen_width - 20, h: 30, centered: :horizontal}
     st.corner_radius = 5
     st.background_color = color.blue
   end

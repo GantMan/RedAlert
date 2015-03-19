@@ -9,9 +9,24 @@ class MainController < UIViewController
     rmq(self.view).apply_style :root_view
 
     #Add buttons for different alert styles
-    rmq.append(UIButton, :alert_view_button).on(:tap) do
-      rmq.alert_view(message: "This is a test")
-    end
+
+
+    rmq.append(UIView, :alert_view_buttons).tap do |avb|
+      avb.append(UIButton, :alert_view_button).on(:tap) do
+        rmq.alert_view(message: "This is a test")
+      end
+
+      avb.append(UIButton, :alert_view_ks_button).on(:tap) do
+        rmq.alert_view({
+          title: "Hey There",
+          message: "This is a test",
+          cancel_button: 'Nevermind',
+          other_buttons: ['Log In'],
+          delegate: nil,
+          view_style: UIAlertViewStyleLoginAndPasswordInput
+        })
+      end
+    end.resize_to_fit_subviews # use padding here?
   end
 
   def supportedInterfaceOrientations
