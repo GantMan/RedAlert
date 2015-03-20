@@ -2,18 +2,6 @@ class ApplicationStylesheet < RubyMotionQuery::Stylesheet
 
   def application_setup
 
-    # Change the default grid if desired
-    #   rmq.app.grid.tap do |g|
-    #     g.num_columns =  12
-    #     g.column_gutter = 10
-    #     g.num_rows = 18
-    #     g.row_gutter = 10
-    #     g.content_left_margin = 10
-    #     g.content_top_margin = 74
-    #     g.content_right_margin = 10
-    #     g.content_bottom_margin = 10
-    #   end
-
     # An example of setting standard fonts and colors
     font_family = 'Helvetica Neue'
     font.add_named :large,    font_family, 36
