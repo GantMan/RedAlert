@@ -12,40 +12,6 @@ module RubyMotionQuery
       destructive: UIAlertActionStyleDestructive
     }
 
-    # Creates and shows the old UIAlertView.  Added here for use in fallback.
-    # Fallback won't run actions, but the old system needed delegates anyhow.
-    # Usage Example:
-    #   rmq.alert_view(message: "This is a test")
-    #   rmq.alert_view(title: "Hey there", message: "Are you happy?")
-    # @return [RMQ]
-    def alert_view(opts = {})
-      # An alert is nothing without a message
-      raise ArgumentError unless opts[:message]
-
-      opts = {
-        title: "Alert!",
-        cancel_button: "OK",
-        other_buttons: [],
-        delegate: nil,
-        view_style: UIAlertViewStyleDefault,
-        show_now: true,
-      }.merge(opts)
-
-      alert_view = UIAlertView.alloc.initWithTitle(
-        opts[:title],
-        message: opts[:message],
-        delegate: opts[:delegate],
-        cancelButtonTitle: opts[:cancel_button],
-        otherButtonTitles: nil
-      )
-      Array(opts[:other_buttons]).each { |button| alert_view.addButtonWithTitle(button) }
-
-      alert_view.alertViewStyle = opts[:view_style]
-
-      alert_view.show if opts[:show_now]
-      rmq(alert_view)
-    end
-
 
     # Creates and shows the UIAlertController.
     # Usage Example:
@@ -86,5 +52,40 @@ module RubyMotionQuery
       end
 
     end
+
+    # Creates and shows the old UIAlertView.  Added here for use in fallback.
+    # Fallback won't run actions, but the old system needed delegates anyhow.
+    # Usage Example:
+    #   rmq.alert_view(message: "This is a test")
+    #   rmq.alert_view(title: "Hey there", message: "Are you happy?")
+    # @return [RMQ]
+    def alert_view(opts = {})
+      # An alert is nothing without a message
+      raise ArgumentError unless opts[:message]
+
+      opts = {
+        title: "Alert!",
+        cancel_button: "OK",
+        other_buttons: [],
+        delegate: nil,
+        view_style: UIAlertViewStyleDefault,
+        show_now: true,
+      }.merge(opts)
+
+      alert_view = UIAlertView.alloc.initWithTitle(
+        opts[:title],
+        message: opts[:message],
+        delegate: opts[:delegate],
+        cancelButtonTitle: opts[:cancel_button],
+        otherButtonTitles: nil
+      )
+      Array(opts[:other_buttons]).each { |button| alert_view.addButtonWithTitle(button) }
+
+      alert_view.alertViewStyle = opts[:view_style]
+
+      alert_view.show if opts[:show_now]
+      rmq(alert_view)
+    end
+
   end
 end

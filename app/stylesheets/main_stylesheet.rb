@@ -49,4 +49,9 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "UIAlertController"
   end
 
+  def alert_controller_advanced_button st
+    basic_button(st)
+    st.text = "More UIAlertController Actions"
+  end
+
 end
