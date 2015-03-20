@@ -18,7 +18,7 @@ class MainController < UIViewController
           puts "#{action.title} was pressed"
         })
 
-        rmq.alert(message: "UIViewController Minimal", actions: [ok])
+        rmq.alert(message: "UIAlertController Minimal", actions: [ok])
       end
 
       acs.append(UIButton, :alert_controller_advanced_button).on(:tap) do

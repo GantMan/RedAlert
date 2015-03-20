@@ -15,6 +15,38 @@ TODO: Write install instructions here
 ## Usage
 
 TODO: Write usage instructions here
+```ruby
+
+  rmq.alert("Are you alive?") do
+    p "He is alive!"
+  end
+
+  rmq.alert(title: "foo", message: "Are you alive?") do
+    p "He is alive!"
+  end
+
+  rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) { |action_type|
+    case action_type
+    when :yes
+      p "yes"
+    when :no
+      p "no"
+    end
+  }
+
+
+  rmq.alert(title: "foo", message: "Would you like a sandwich?", actions: []
+  }
+
+
+  rmq.alert(title: "More Actions",
+            message: "UIViewController 2",
+            actions: [
+              {text: "OK", style: :default, handler: ->{}}
+              {text: "OK", style: :default, handler: ->{}}
+            ])
+```
+
 
 ### Example using stylesheet:
 

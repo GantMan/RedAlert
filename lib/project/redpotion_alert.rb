@@ -30,7 +30,6 @@ module RubyMotionQuery
         show_now: true,
       }.merge(opts)
 
-      my_alert = nil
 
       # UIAlertController introduced in iOS8 only
       if rmq.device.ios_at_least? 8
@@ -49,7 +48,7 @@ module RubyMotionQuery
         end
 
         # Present it, if that's what we want
-        rmq.app.window.rootViewController.presentViewController(ac, animated: opts[:animated], completion: nil) if opts[:show_now]
+        rmq.view_controller.presentViewController(ac, animated: opts[:animated], completion: nil) if opts[:show_now]
 
         # return it wrapped in RMQ
         rmq(ac)
