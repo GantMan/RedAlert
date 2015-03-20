@@ -20,7 +20,7 @@ module RubyMotionQuery
     # @return [RMQ]
     def alert(opts = {})
       # An alert is nothing without a message
-      raise ArgumentError unless opts[:message]
+      raise(ArgumentError, "RedPotion alert requires a message") unless opts[:message]
 
       opts = {
         title: "Alert!",
@@ -39,7 +39,13 @@ module RubyMotionQuery
         ac = UIAlertController.alertControllerWithTitle(opts[:title], message:opts[:message], preferredStyle: style)
 
         opts[:actions].each do |action|
-          ac.addAction(action)
+          if action.is_a? UIAlertAction
+            ac.addAction(action)
+          elsif action.is_a? Hash
+            p "Parse and use hash as action"
+          else
+            raise ArgumentError, "RedPotion alert actions must be of type UIAlertAction or Hash"
+          end
         end
 
         # Present it, if that's what we want
@@ -61,7 +67,7 @@ module RubyMotionQuery
     # @return [RMQ]
     def alert_view(opts = {})
       # An alert is nothing without a message
-      raise ArgumentError unless opts[:message]
+      raise(ArgumentError, "RedPotion alert requires a message") unless opts[:message]
 
       opts = {
         title: "Alert!",
