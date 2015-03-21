@@ -16,7 +16,7 @@ class MainStylesheet < ApplicationStylesheet
     st.frame = {bp: 10, w: screen_width, h: 40}
     st.text_alignment = :centered
     st.number_of_lines = 2
-    st.text = "UIAlertView Fallback (Deprecated)"
+    st.text = "UIAlertView Classic (Deprecated)"
   end
 
   def alert_view_button st
@@ -52,6 +52,16 @@ class MainStylesheet < ApplicationStylesheet
   def alert_controller_two st
     basic_button(st)
     st.text = "Alert with callback"
+  end
+
+  def alert_controller_three st
+    basic_button(st)
+    st.text = "Change Title and Message"
+  end
+
+  def alert_controller_four st
+    basic_button(st)
+    st.text = "Title and :sheet Style"
   end
 
   def alert_controller_advanced_button st

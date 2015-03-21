@@ -37,7 +37,7 @@ module RubyMotionQuery
       opts = {
         title: "Alert!",
         style: :alert,
-        actions: [],
+        actions: [make_button],
         animated: true,
         show_now: true,
       }.merge(opts)
@@ -90,8 +90,11 @@ module RubyMotionQuery
     #   rmq.alert_view(title: "Hey there", message: "Are you happy?")
     # @return [RMQ]
     def alert_view(opts = {})
+
+      # shortcut sending a string
+      opts = {message: opts} if opts.is_a? String
       # An alert is nothing without a message
-      raise(ArgumentError, "RedAlert requires a message") unless opts[:message]
+      raise(ArgumentError, "RedAlert requires a message") if opts[:message].nil? || opts[:message].empty?
 
       opts = {
         title: "Alert!",

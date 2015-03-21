@@ -22,6 +22,14 @@ class MainController < UIViewController
         }
       end
 
+      acs.append(UIButton, :alert_controller_three).on(:tap) do
+        rmq.alert(title: "New TITLE!", message: "So easy!")
+      end
+
+      acs.append(UIButton, :alert_controller_four).on(:tap) do
+        rmq.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet)
+      end
+
       acs.append(UIButton, :alert_controller_advanced_button).on(:tap) do
 
         ok = UIAlertAction.actionWithTitle("OK", style: UIAlertActionStyleDefault, handler: -> (action) {
@@ -47,7 +55,7 @@ class MainController < UIViewController
       avs.append(UILabel, :alert_view_title)
 
       avs.append(UIButton, :alert_view_button).on(:tap) do
-        rmq.alert_view(message: "Minimal UIAlertView")
+        rmq.alert_view("Minimal UIAlertView")
       end
 
       avs.append(UIButton, :alert_view_ks_button).on(:tap) do
