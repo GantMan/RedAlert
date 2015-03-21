@@ -81,7 +81,8 @@ module RubyMotionQuery
       style = ALERT_ACTION_STYLE[opts[:style]] || opts[:style]
 
       UIAlertAction.actionWithTitle(opts[:title], style: style, handler: -> (action) {
-        block.call unless block.nil?
+        title_symbol = action.title.gsub(/\s+/,"_").downcase.to_sym
+        block.call(title_symbol) unless block.nil?
       })
     end
 

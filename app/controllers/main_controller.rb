@@ -44,12 +44,12 @@ class MainController < UIViewController
 
       # Action sheet with template
       acs.append(UIButton, :alert_controller_five).on(:tap) do
-        rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |action_type|
-          case action_type
+        rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |title|
+          case title
           when :yes
-            puts "yes"
+            puts "Here's your Sandwich!"
           when :no
-            puts "no"
+            puts "FINE!"
           end
         end
       end
