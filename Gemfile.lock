@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    redpotion_alert (0.1)
+    RedAlert (0.1)
       ruby_motion_query (>= 0.8.0)
 
 GEM
@@ -14,5 +14,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedAlert!
   rake
-  redpotion_alert!

@@ -3,7 +3,7 @@ class MainController < UIViewController
   def viewDidLoad
     super
 
-    self.title = 'redpotion_alert'
+    self.title = 'RedAlert'
 
     rmq.stylesheet = MainStylesheet
     rmq(self.view).apply_style :root_view

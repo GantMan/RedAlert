@@ -55,7 +55,7 @@ module RubyMotionQuery
           elsif action.is_a? Hash
             p "Parse and use hash as action"
           else
-            raise ArgumentError, "RedPotion alert actions must be of type UIAlertAction or Hash"
+            raise ArgumentError, "RedAlert actions must be of type UIAlertAction or Hash"
           end
         end
 
@@ -91,7 +91,7 @@ module RubyMotionQuery
     # @return [RMQ]
     def alert_view(opts = {})
       # An alert is nothing without a message
-      raise(ArgumentError, "RedPotion alert requires a message") unless opts[:message]
+      raise(ArgumentError, "RedAlert requires a message") unless opts[:message]
 
       opts = {
         title: "Alert!",
