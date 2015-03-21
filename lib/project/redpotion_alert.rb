@@ -18,12 +18,10 @@ module RubyMotionQuery
     #   rmq.alert(message: "This is a test")
     #   rmq.alert(title: "Hey there", message: "Are you happy?")
     # @return [RMQ]
-    def alert(opts = {})
+    def alert(opts = {}, &block)
 
       if opts.is_a? String
-        ok = ok_button do
-          p "OK Pressed"
-        end
+        ok = make_button(&block)
         core_alert(message: opts, actions: [ok])
       else
         core_alert(opts)
@@ -34,7 +32,7 @@ module RubyMotionQuery
 
     def core_alert(opts = {})
       # An alert is nothing without a message
-      raise(ArgumentError, "RedPotion alert requires a message") unless opts[:message]
+      raise(ArgumentError, "RedAlert alert requires a message") unless opts[:message]
 
       opts = {
         title: "Alert!",
@@ -71,9 +69,16 @@ module RubyMotionQuery
       end
     end
 
-    def ok_button &block
-      UIAlertAction.actionWithTitle("OK", style: UIAlertActionStyleDefault, handler: -> (action) {
-        block.call
+    def make_button (opts = {}, &block)
+      opts = {
+        title: "OK",
+        style: :default,
+      }.merge(opts)
+
+      style = ALERT_ACTION_STYLE[opts[:style]] || opts[:style]
+
+      UIAlertAction.actionWithTitle(opts[:title], style: style, handler: -> (action) {
+        block.call unless block.nil?
       })
     end
 

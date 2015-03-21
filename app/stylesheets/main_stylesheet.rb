@@ -46,12 +46,17 @@ class MainStylesheet < ApplicationStylesheet
 
   def alert_controller_button st
     basic_button(st)
-    st.text = "UIAlertController"
+    st.text = "Simplest Alert"
+  end
+
+  def alert_controller_two st
+    basic_button(st)
+    st.text = "Alert with callback"
   end
 
   def alert_controller_advanced_button st
     basic_button(st)
-    st.text = "More UIAlertController Actions"
+    st.text = "Custom UIAlertController Actions"
   end
 
 end

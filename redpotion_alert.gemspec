@@ -3,7 +3,7 @@ $:.push File.expand_path('../lib', __FILE__)
 VERSION = "0.1"
 
 Gem::Specification.new do |spec|
-  spec.name          = "redpotion_alert"
+  spec.name          = "RedAlert"
   spec.version       = VERSION
   spec.authors       = ["Gant"]
   spec.email         = ["GantMan@gmail.com"]

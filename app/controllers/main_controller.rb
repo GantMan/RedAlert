@@ -13,7 +13,13 @@ class MainController < UIViewController
       acs.append(UILabel, :alert_controller_title)
 
       acs.append(UIButton, :alert_controller_button).on(:tap) do
-        rmq.alert("UIAlertController Minimal")
+        rmq.alert("Minimal Alert")
+      end
+
+      acs.append(UIButton, :alert_controller_two).on(:tap) do
+        rmq.alert("Alert with Block") {
+          puts "Alert with Block worked!"
+        }
       end
 
       acs.append(UIButton, :alert_controller_advanced_button).on(:tap) do
