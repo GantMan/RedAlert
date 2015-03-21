@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.version       = VERSION
   spec.authors       = ["Gant"]
   spec.email         = ["GantMan@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
-  spec.license       = ""
+  spec.description   = "Plugin adds efficient and dynamic alerts/sheets for RMQ"
+  spec.summary       = "Plugin adds efficient and dynamic alerts/sheets for RMQ"
+  spec.homepage      = "https://github.com/GantMan/RedAlert"
+  spec.license       = "MIT"
 
   files = []
   files << 'README.md'
