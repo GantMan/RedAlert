@@ -19,6 +19,20 @@ module RubyMotionQuery
     #   rmq.alert(title: "Hey there", message: "Are you happy?")
     # @return [RMQ]
     def alert(opts = {})
+
+      if opts.is_a? String
+        ok = ok_button do
+          p "OK Pressed"
+        end
+        core_alert(message: opts, actions: [ok])
+      else
+        core_alert(opts)
+      end
+
+    end
+
+
+    def core_alert(opts = {})
       # An alert is nothing without a message
       raise(ArgumentError, "RedPotion alert requires a message") unless opts[:message]
 
@@ -55,8 +69,14 @@ module RubyMotionQuery
       else
         alert_view(opts)
       end
-
     end
+
+    def ok_button &block
+      UIAlertAction.actionWithTitle("OK", style: UIAlertActionStyleDefault, handler: -> (action) {
+        block.call
+      })
+    end
+
 
     # Creates and shows the old UIAlertView.  Added here for use in fallback.
     # Fallback won't run actions, but the old system needed delegates anyhow.
