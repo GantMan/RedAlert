@@ -64,9 +64,19 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "Title and :sheet Style"
   end
 
+  def alert_controller_five st
+    basic_button(st)
+    st.text = "Actions via Hash"
+  end
+
+  def alert_controller_six st
+    basic_button(st)
+    st.text = "Custom Actions via Helper"
+  end
+
   def alert_controller_advanced_button st
     basic_button(st)
-    st.text = "Custom UIAlertController Actions"
+    st.text = "Using UIAlertAction"
   end
 
 end

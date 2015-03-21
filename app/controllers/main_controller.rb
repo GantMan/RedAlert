@@ -30,6 +30,39 @@ class MainController < UIViewController
         rmq.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet)
       end
 
+      acs.append(UIButton, :alert_controller_five).on(:tap) do
+        rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) { |action_type|
+          case action_type
+          when :yes
+            p "yes"
+          when :no
+            p "no"
+          end
+        }
+      end
+
+      acs.append(UIButton, :alert_controller_six).on(:tap) do
+        ok = rmq.make_button {
+          p "OK pressed"
+        }
+
+        yes = rmq.make_button("Yes") {
+          p "Yes pressed"
+        }
+
+        cancel = rmq.make_button(title: "Cancel", style: :cancel) {
+          p "Cancel pressed"
+        }
+
+        destructive = rmq.make_button(title: "Destructive", style: :destructive) {
+          p "Destructive pressed"
+        }
+
+        button_list = [ok, yes, cancel, destructive]
+
+        rmq.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
+      end
+
       acs.append(UIButton, :alert_controller_advanced_button).on(:tap) do
 
         ok = UIAlertAction.actionWithTitle("OK", style: UIAlertActionStyleDefault, handler: -> (action) {

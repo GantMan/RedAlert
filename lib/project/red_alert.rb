@@ -70,6 +70,9 @@ module RubyMotionQuery
     end
 
     def make_button (opts = {}, &block)
+      # shortcut sending a string
+      opts = {title: opts} if opts.is_a? String
+
       opts = {
         title: "OK",
         style: :default,
