@@ -42,17 +42,16 @@ class MainController < UIViewController
       #  Multiple button examples
       ##############################
 
-
       # Action sheet with template
       acs.append(UIButton, :alert_controller_five).on(:tap) do
-        rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) { |action_type|
+        rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |action_type|
           case action_type
           when :yes
-            p "yes"
+            puts "yes"
           when :no
-            p "no"
+            puts "no"
           end
-        }
+        end
       end
 
       # Alert example with 4 buttons, each made with `make_button` helper.

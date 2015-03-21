@@ -65,7 +65,7 @@ module RubyMotionQuery
         # return it wrapped in RMQ
         rmq(ac)
       else
-        alert_view(opts)
+        raise "RedAlert requires iOS8 for alerts.  Please try `rmq.alert_view`"
       end
     end
 
