@@ -27,9 +27,11 @@ class MainController < UIViewController
       end
 
       # Alert example with changed title and message.
-      # OK button that doesn't care when pressed.
+      # OK button that prints the button's action_type
       acs.append(UIButton, :alert_controller_three).on(:tap) do
-        rmq.alert(title: "New TITLE!", message: "So easy!")
+        rmq.alert(title: "New TITLE!", message: "So easy!") do |action_type|
+          puts "you clicked #{action_type}"
+        end
       end
 
       # Simple action sheet example.
@@ -57,19 +59,19 @@ class MainController < UIViewController
       # Alert example with 4 buttons, each made with `make_button` helper.
       acs.append(UIButton, :alert_controller_six).on(:tap) do
         ok = rmq.make_button {
-          p "OK pressed"
+          puts "OK pressed"
         }
 
         yes = rmq.make_button("Yes") {
-          p "Yes pressed"
+          puts "Yes pressed"
         }
 
         cancel = rmq.make_button(title: "Cancel", style: :cancel) {
-          p "Cancel pressed"
+          puts "Cancel pressed"
         }
 
         destructive = rmq.make_button(title: "Destructive", style: :destructive) {
-          p "Destructive pressed"
+          puts "Destructive pressed"
         }
 
         button_list = [ok, yes, cancel, destructive]
