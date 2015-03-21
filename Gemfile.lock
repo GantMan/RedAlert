@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    RedAlert (0.1)
-      ruby_motion_query (>= 0.8.0)
+    RedAlert (0.2)
+      ruby_motion_query (>= 1.2.0)
 
 GEM
   remote: https://rubygems.org/

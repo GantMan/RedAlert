@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-VERSION = "0.1"
+VERSION = "0.2"
 
 Gem::Specification.new do |spec|
   spec.name          = "RedAlert"
   spec.version       = VERSION
   spec.authors       = ["Gant"]
   spec.email         = ["GantMan@gmail.com"]
-  spec.description   = "Plugin adds efficient and dynamic alerts/sheets for RMQ"
-  spec.summary       = "Plugin adds efficient and dynamic alerts/sheets for RMQ"
+  spec.description   = "RMQ Plugin adds efficient and dynamic alerts/sheets for RubyMotion"
+  spec.summary       = "RMQ Plugin adds efficient and dynamic alerts/sheets for RubyMotion."
   spec.homepage      = "https://github.com/GantMan/RedAlert"
   spec.license       = "MIT"
 
@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency 'ruby_motion_query', '>= 0.8.0'
+  spec.add_runtime_dependency 'ruby_motion_query', '>= 1.2.0'
   spec.add_development_dependency "rake"
 end
