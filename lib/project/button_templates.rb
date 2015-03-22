@@ -1,7 +1,10 @@
 module RubyMotionQuery
   module ButtonTemplates
 
-    # add_template_actions(ac, template_symbol, &block)
+    # When adding a new template do the following:
+    # 1 - Add it here
+    # 2 - Add the test
+    # 3 - Add symbol to the README.md list
     def add_template_actions(uiac, template, &block)
       case template
       when :yes_no
