@@ -68,17 +68,7 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "Title and :sheet Style"
   end
 
-  def alert_controller_five st
-    basic_button(st)
-    st.text = ":sheet Actions via Template"
-  end
-
-  def alert_controller_six st
-    basic_button(st)
-    st.text = ":delete_cancel Template"
-  end
-
-  def alert_controller_seven st
+  def custom_actions_helper st
     basic_button(st)
     st.text = "Custom Actions via Helper"
   end
@@ -86,6 +76,33 @@ class MainStylesheet < ApplicationStylesheet
   def alert_controller_advanced_button st
     basic_button(st)
     st.text = "Using UIAlertAction"
+  end
+
+  def usage_tour st
+    st.frame = {bp: 10, w: screen_width - 20, l: 10, h:15}
+    st.clips_to_bounds = false
+    st.text = "Basic Usage Tour"
+  end
+
+  def template_tour st
+    st.frame = {bp: 10, w: screen_width - 20, l: 10, h:20}
+    st.clips_to_bounds = false
+    st.text = "Tour of Included Templates"
+  end
+
+  def alert_controller_yesno st
+    basic_button(st)
+    st.text = ":yes_no Template"
+  end
+
+  def alert_controller_yesnocancel st
+    basic_button(st)
+    st.text = ":yes_no_cancel Template :sheet"
+  end
+
+  def alert_controller_deletecancel st
+    basic_button(st)
+    st.text = ":delete_cancel Template"
   end
 
 end

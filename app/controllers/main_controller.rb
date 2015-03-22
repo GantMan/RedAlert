@@ -13,6 +13,7 @@ class MainController < UIViewController
       # New UIAlertController Examples
       cs.append(UIView, :alert_controller_section).tap do |acs|
         acs.append(UILabel, :alert_controller_title)
+        acs.append(UILabel, :usage_tour)
 
         # Simple alert example that has an OK button (RedAlert default),
         # doesn't care when it's pressed.
@@ -46,31 +47,9 @@ class MainController < UIViewController
         #  Multiple button examples
         ##############################
 
-        # Action sheet with ease of the template
-        acs.append(UIButton, :alert_controller_five).on(:tap) do
-          rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |title|
-            case title
-            when :yes
-              puts "Here's your Sandwich!"
-            when :no
-              puts "FINE!"
-            end
-          end
-        end
-
-        acs.append(UIButton, :alert_controller_six).on(:tap) do
-         rmq.alert(title: "DESTROY!!!", message: "Would you like to remove some important data?", actions: :delete_cancel) do |title|
-            case title
-            when :delete
-              puts "Destroying that data!"
-            when :cancel
-              puts "keep all the things!"
-            end
-          end
-        end
 
         # Alert example with 4 buttons, each made with `make_button` helper.
-        acs.append(UIButton, :alert_controller_seven).on(:tap) do
+        acs.append(UIButton, :custom_actions_helper).on(:tap) do
           ok = rmq.make_button {
             puts "OK pressed"
           }
@@ -108,6 +87,44 @@ class MainController < UIViewController
           })
 
           rmq.alert(title: "More Actions", message: "UIViewController 2", actions: [ok, cancel, delete])
+        end
+
+
+        acs.append(UILabel, :template_tour)
+
+
+        # Action sheet with ease of the template
+        acs.append(UIButton, :alert_controller_yesno).on(:tap) do
+          rmq.alert(message: "Would you use Templates?", actions: :yes_no) do |title|
+            case title
+            when :yes
+              puts "They are so easy!"
+            when :no
+              puts "No worries, we can build custom."
+            end
+          end
+        end
+
+        acs.append(UIButton, :alert_controller_yesnocancel).on(:tap) do
+          rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |title|
+            case title
+            when :yes
+              puts "Here's your Sandwich!"
+            when :no
+              puts "FINE!"
+            end
+          end
+        end
+
+        acs.append(UIButton, :alert_controller_deletecancel).on(:tap) do
+         rmq.alert(title: "DESTROY!!!", message: "Would you like to remove some important data?", actions: :delete_cancel) do |title|
+            case title
+            when :delete
+              puts "Destroying that data!"
+            when :cancel
+              puts "keep all the things!"
+            end
+          end
         end
 
       end.resize_frame_to_fit_subviews(bottom: 10, right: -5)
