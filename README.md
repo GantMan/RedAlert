@@ -1,3 +1,4 @@
+<img src="./_art/logo.png" alt="RedAlert Logo" width="100" />
 [![image](http://ir_wp.s3.amazonaws.com/wp-content/uploads/sites/19/2014/09/rmq_plugin.png)](http://rubymotionquery.com)
 
 # RedAlert
@@ -11,11 +12,11 @@ With an emphasis on ease of use, this gem allows you to quickly implement Alerts
 
 ## Screenshot
 
-<img src="http://i.imgur.com/RPvQvDF.png" alt="Screen Shot" width="500" />
+<img src="./_art/screen.png" alt="Screen Shot" width="500" />
 
 ## Installation
 
-**Requires RMQ 1.2.0 or later, and iOS 8 or later**#
+**Requires RMQ 1.2.0 or later, and iOS 8 or later**
 
 Add the RedAlert gem to your Gemfile.
 ```ruby
@@ -24,7 +25,6 @@ Add the RedAlert gem to your Gemfile.
 
 ## Usage
 
-TODO: Write usage instructions here
 ```ruby
 
   # Simply do an alert
@@ -34,8 +34,11 @@ TODO: Write usage instructions here
   rmq.alert("Alert with Block") {
     puts "Alert with Block worked!"
   }
+  
+  # Modify some snazzy options
+  alert_controller = rmq.alert(title: "New Title", message: "Great message", animated: false)
 
-  # Switch it to look like an ActionSheet
+  # Switch it to look like an ActionSheet by setting the style
   rmq.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet) do |action_type|
     puts "you clicked #{action_type}"
   end  
@@ -63,6 +66,16 @@ You can even use the `make_button` helper to create custom UIAction buttons to a
   button_list = [taco, nacho]        
   rmq.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
 ```
+
+## Available Templates
+
+Templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/lib/project/button_templates.rb)
+* `:yes_no` = Simple yes and no buttons.
+* `:yes_no_cancel` = Yes/no buttons with a separated cancel button.
+* `:ok_cancel` = OK button with a separated cancel button.
+* `:delete_cancel` = Delete button (red) with a separated cancel button.
+
+_More to come:_ be sure to submit a pull-request with your button template needs.
 
 ## More info
 
