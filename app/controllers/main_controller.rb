@@ -86,7 +86,7 @@ class MainController < UIViewController
             puts "#{action.title} was pressed"
           })
 
-          rmq.alert(title: "More Actions", message: "UIViewController 2", actions: [ok, cancel, delete])
+          rmq.alert(title: "More Actions", message: "UIViewController Actions", actions: [ok, cancel, delete])
         end
 
 
