@@ -18,7 +18,7 @@ With an emphasis on ease of use, this gem allows you to quickly implement Alerts
 
 **Requires RMQ 1.2.0 or later, and iOS 8 or later**
 
-Add the RedAlert gem to your Gemfile.
+Add the **RedAlert** gem to your Gemfile.
 ```ruby
   gem 'RedAlert'
 ```
@@ -36,11 +36,11 @@ Add the RedAlert gem to your Gemfile.
   }
   
   # Modify some snazzy options
-  alert_controller = rmq.alert(title: "New Title", message: "Great message", animated: false)
+  rmq.alert(title: "New Title", message: "Great message", animated: false)
 
   # Switch it to look like an ActionSheet by setting the style
   rmq.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet) do |action_type|
-    puts "you clicked #{action_type}"
+    puts "You clicked #{action_type}"
   end  
   
   # Utilize common templates
