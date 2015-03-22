@@ -60,6 +60,12 @@ TODO: no stylesheet example here
 
 TODO: list methods available to user here
 
+## More info
+
+Feel free to read up on UIAlertController to see how this could be better!
+* [Hayageek](http://hayageek.com/uialertcontroller-example-ios/)
+* [NSHipster](http://nshipster.com/uialertcontroller/)
+
 ## Contributing
 
 1. Fork it

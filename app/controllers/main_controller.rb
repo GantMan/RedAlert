@@ -8,117 +8,132 @@ class MainController < UIViewController
     rmq.stylesheet = MainStylesheet
     rmq(self.view).apply_style :root_view
 
-    # New UIAlertController Examples
-    rmq.append(UIView, :alert_controller_section).tap do |acs|
-      acs.append(UILabel, :alert_controller_title)
+    rmq.append(UIScrollView, :containing_scroller).tap do |cs|
 
-      # Simple alert example that has an OK button (RedAlert default),
-      # doesn't care when it's pressed.
-      acs.append(UIButton, :alert_controller_button).on(:tap) do
-        rmq.alert("Minimal Alert")
-      end
+      # New UIAlertController Examples
+      cs.append(UIView, :alert_controller_section).tap do |acs|
+        acs.append(UILabel, :alert_controller_title)
 
-      # Alert example that has an OK button (RedAlert default),
-      # puts a message when pressed.
-      acs.append(UIButton, :alert_controller_two).on(:tap) do
-        rmq.alert("Alert with Block") {
-          puts "Alert with Block worked!"
-        }
-      end
-
-      # Alert example with changed title and message.
-      # OK button that prints the button's action_type
-      acs.append(UIButton, :alert_controller_three).on(:tap) do
-        rmq.alert(title: "New TITLE!", message: "So easy!") do |action_type|
-          puts "you clicked #{action_type}"
+        # Simple alert example that has an OK button (RedAlert default),
+        # doesn't care when it's pressed.
+        acs.append(UIButton, :alert_controller_button).on(:tap) do
+          rmq.alert("Minimal Alert")
         end
-      end
 
-      # Simple action sheet example.
-      # OK button that doesn't care when pressed.
-      acs.append(UIButton, :alert_controller_four).on(:tap) do
-        rmq.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet)
-      end
+        # Alert example that has an OK button (RedAlert default),
+        # puts a message when pressed.
+        acs.append(UIButton, :alert_controller_two).on(:tap) do
+          rmq.alert("Alert with Block") {
+            puts "Alert with Block worked!"
+          }
+        end
 
-      ##############################
-      #  Multiple button examples
-      ##############################
-
-      # Action sheet with ease of the template
-      acs.append(UIButton, :alert_controller_five).on(:tap) do
-        rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |title|
-          case title
-          when :yes
-            puts "Here's your Sandwich!"
-          when :no
-            puts "FINE!"
+        # Alert example with changed title and message.
+        # OK button that prints the button's action_type
+        acs.append(UIButton, :alert_controller_three).on(:tap) do
+          rmq.alert(title: "New TITLE!", message: "So easy!") do |action_type|
+            puts "you clicked #{action_type}"
           end
         end
-      end
 
-      # Alert example with 4 buttons, each made with `make_button` helper.
-      acs.append(UIButton, :alert_controller_six).on(:tap) do
-        ok = rmq.make_button {
-          puts "OK pressed"
-        }
+        # Simple action sheet example.
+        # OK button that doesn't care when pressed.
+        acs.append(UIButton, :alert_controller_four).on(:tap) do
+          rmq.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet)
+        end
 
-        yes = rmq.make_button("Yes") {
-          puts "Yes pressed"
-        }
+        ##############################
+        #  Multiple button examples
+        ##############################
 
-        cancel = rmq.make_button(title: "Cancel", style: :cancel) {
-          puts "Cancel pressed"
-        }
+        # Action sheet with ease of the template
+        acs.append(UIButton, :alert_controller_five).on(:tap) do
+          rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |title|
+            case title
+            when :yes
+              puts "Here's your Sandwich!"
+            when :no
+              puts "FINE!"
+            end
+          end
+        end
 
-        destructive = rmq.make_button(title: "Destructive", style: :destructive) {
-          puts "Destructive pressed"
-        }
+        acs.append(UIButton, :alert_controller_six).on(:tap) do
+         rmq.alert(title: "DESTROY!!!", message: "Would you like to remove some important data?", actions: :delete_cancel) do |title|
+            case title
+            when :delete
+              puts "Destroying that data!"
+            when :cancel
+              puts "keep all the things!"
+            end
+          end
+        end
 
-        button_list = [ok, yes, cancel, destructive]
+        # Alert example with 4 buttons, each made with `make_button` helper.
+        acs.append(UIButton, :alert_controller_seven).on(:tap) do
+          ok = rmq.make_button {
+            puts "OK pressed"
+          }
 
-        rmq.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
-      end
+          yes = rmq.make_button("Yes") {
+            puts "Yes pressed"
+          }
 
-      # Example of loading the actions array with native UIAlertAction objects.
-      acs.append(UIButton, :alert_controller_advanced_button).on(:tap) do
+          cancel = rmq.make_button(title: "Cancel", style: :cancel) {
+            puts "Cancel pressed"
+          }
 
-        ok = UIAlertAction.actionWithTitle("OK", style: UIAlertActionStyleDefault, handler: -> (action) {
-          puts "#{action.title} was pressed"
-        })
+          destructive = rmq.make_button(title: "Destructive", style: :destructive) {
+            puts "Destructive pressed"
+          }
 
-        cancel = UIAlertAction.actionWithTitle("Cancel", style: UIAlertActionStyleCancel, handler: -> (action) {
-          puts "#{action.title} was pressed"
-        })
+          button_list = [ok, yes, cancel, destructive]
 
-        delete = UIAlertAction.actionWithTitle("Delete", style: UIAlertActionStyleDestructive, handler: -> (action) {
-          puts "#{action.title} was pressed"
-        })
+          rmq.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
+        end
 
-        rmq.alert(title: "More Actions", message: "UIViewController 2", actions: [ok, cancel, delete])
-      end
+        # Example of loading the actions array with native UIAlertAction objects.
+        acs.append(UIButton, :alert_controller_advanced_button).on(:tap) do
 
-    end.resize_frame_to_fit_subviews(bottom: 10, right: -5)
+          ok = UIAlertAction.actionWithTitle("OK", style: UIAlertActionStyleDefault, handler: -> (action) {
+            puts "#{action.title} was pressed"
+          })
+
+          cancel = UIAlertAction.actionWithTitle("Cancel", style: UIAlertActionStyleCancel, handler: -> (action) {
+            puts "#{action.title} was pressed"
+          })
+
+          delete = UIAlertAction.actionWithTitle("Delete", style: UIAlertActionStyleDestructive, handler: -> (action) {
+            puts "#{action.title} was pressed"
+          })
+
+          rmq.alert(title: "More Actions", message: "UIViewController 2", actions: [ok, cancel, delete])
+        end
+
+      end.resize_frame_to_fit_subviews(bottom: 10, right: -5)
 
 
-    # Classic UIAlertView Examples
-    rmq.append(UIView, :alert_view_section).tap do |avs|
-      avs.append(UILabel, :alert_view_title)
+      # Classic UIAlertView Examples
+      cs.append(UIView, :alert_view_section).tap do |avs|
+        avs.append(UILabel, :alert_view_title)
 
-      avs.append(UIButton, :alert_view_button).on(:tap) do
-        rmq.alert_view("Minimal UIAlertView")
-      end
+        avs.append(UIButton, :alert_view_button).on(:tap) do
+          rmq.alert_view("Minimal UIAlertView")
+        end
 
-      avs.append(UIButton, :alert_view_ks_button).on(:tap) do
-        rmq.alert_view({
-          title: "Hey There",
-          message: "Check out this complex alert!",
-          cancel_button: 'Nevermind',
-          other_buttons: ['Log In'],
-          delegate: nil,
-          view_style: UIAlertViewStyleLoginAndPasswordInput
-        })
-      end
-    end.resize_frame_to_fit_subviews(bottom: 10, right: -5)
+        avs.append(UIButton, :alert_view_ks_button).on(:tap) do
+          rmq.alert_view({
+            title: "Hey There",
+            message: "Check out this complex alert!",
+            cancel_button: 'Nevermind',
+            other_buttons: ['Log In'],
+            delegate: nil,
+            view_style: UIAlertViewStyleLoginAndPasswordInput
+          })
+        end
+      end.resize_frame_to_fit_subviews(bottom: 10, right: -5)
+
+    end.resize_content_to_fit_subviews
   end
 
   def supportedInterfaceOrientations

@@ -4,6 +4,10 @@ class MainStylesheet < ApplicationStylesheet
     st.background_color = color.white
   end
 
+  def containing_scroller st
+    st.frame = :full
+  end
+
   def alert_view_section st
     st.frame = {bp: 20, w: screen_width - 5, centered: :horizontal}
     st.border_color = color.from_rgba(0,0,0,0.5)
@@ -30,7 +34,7 @@ class MainStylesheet < ApplicationStylesheet
   end
 
   def alert_controller_section st
-    st.frame = {t: 75, w: screen_width - 5, centered: :horizontal}
+    st.frame = {t: 10, w: screen_width - 5, centered: :horizontal}
     st.border_color = color.from_rgba(0,0,0,0.5)
     st.border_width = 1
     st.corner_radius = 5
@@ -66,10 +70,15 @@ class MainStylesheet < ApplicationStylesheet
 
   def alert_controller_five st
     basic_button(st)
-    st.text = "Actions via Template"
+    st.text = ":sheet Actions via Template"
   end
 
   def alert_controller_six st
+    basic_button(st)
+    st.text = ":delete_cancel Template"
+  end
+
+  def alert_controller_seven st
     basic_button(st)
     st.text = "Custom Actions via Helper"
   end
