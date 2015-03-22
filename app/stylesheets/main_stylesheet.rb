@@ -66,7 +66,7 @@ class MainStylesheet < ApplicationStylesheet
 
   def alert_controller_five st
     basic_button(st)
-    st.text = "Actions via Hash"
+    st.text = "Actions via Template"
   end
 
   def alert_controller_six st

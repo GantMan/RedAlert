@@ -15,14 +15,20 @@ module RubyMotionQuery
 
       ac = UIAlertController.alertControllerWithTitle(opts[:title], message:opts[:message], preferredStyle: style)
 
-      opts[:actions].each do |action|
-        if action.is_a? UIAlertAction
-          ac.addAction(action)
-        elsif action.is_a? Hash
-          p "Parse and use hash as action"
-        else
-          raise ArgumentError, "RedAlert actions must be of type UIAlertAction or Hash"
+      # Add correct actions (buttons) to the UIAC
+      if opts[:actions].is_a? Symbol
+        template_symbol = opts[:actions]
+        add_template_actions(ac, template_symbol, &block)
+      elsif opts[:actions].is_a? Array
+        opts[:actions].each do |action|
+          if action.is_a? UIAlertAction
+            ac.addAction(action)
+          else
+            raise ArgumentError, "RedAlert actions array must contain UIAlertAction objects"
+          end
         end
+      else
+        raise ArgumentError, "RedAlert actions parameter must be an Array or a Template symbol"
       end
 
       # Present it, if that's what we want

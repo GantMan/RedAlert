@@ -13,7 +13,7 @@ module RubyMotionQuery
       opts = {message: opts} if opts.is_a? String
 
       # An alert is nothing without a message
-      raise(ArgumentError, "RedAlert alert requires a message") if opts[:message].nil? || opts[:message].empty?
+      raise(ArgumentError, "RedAlert alert requires a message") if RubyMotionQuery::RMQ.is_blank?(opts[:message])
       # iOS8 and above only for UIAlertController
       raise "RedAlert requires iOS8 for alerts.  Please try `rmq.alert_view`" unless rmq.device.ios_at_least? 8
       core_alert(opts, &block)
