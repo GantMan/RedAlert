@@ -34,8 +34,8 @@ module RubyMotionQuery
       # Present it, if that's what we want
       rmq.view_controller.presentViewController(ac, animated: opts[:animated], completion: nil) if opts[:show_now]
 
-      # return it wrapped in RMQ
-      rmq(ac)
+      # return controller (should I wrap it in RMQ?)
+      ac
     end
 
   end

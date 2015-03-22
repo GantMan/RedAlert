@@ -7,7 +7,7 @@ module RubyMotionQuery
     # Usage Example:
     #   rmq.alert(message: "This is a test")
     #   rmq.alert(title: "Hey there", message: "Are you happy?")
-    # @return [RMQ]
+    # @return [UIAlertController]
     def alert(opts = {}, &block)
       # Shortcut: assume a string is the message
       opts = {message: opts} if opts.is_a? String

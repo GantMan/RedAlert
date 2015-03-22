@@ -79,7 +79,7 @@ class MainStylesheet < ApplicationStylesheet
   end
 
   def usage_tour st
-    st.frame = {bp: 10, w: screen_width - 20, l: 10, h:15}
+    st.frame = {bp: 10, w: screen_width - 20, l: 10, h:20}
     st.clips_to_bounds = false
     st.text = "Basic Usage Tour"
   end

@@ -6,7 +6,7 @@ module RubyMotionQuery
     # Usage Example:
     #   rmq.alert_view("This is a test")
     #   rmq.alert_view(title: "Hey there", message: "Enjoying this?")
-    # @return [RMQ]
+    # @return [UIAlertView]
     def alert_view(opts = {})
 
       # shortcut sending a string
@@ -35,7 +35,7 @@ module RubyMotionQuery
       alert_view.alertViewStyle = opts[:view_style]
 
       alert_view.show if opts[:show_now]
-      rmq(alert_view)
+      alert_view
     end
 
   end
