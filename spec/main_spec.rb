@@ -1,5 +1,6 @@
 describe "Application 'red_alert'" do
   before do
+    #@app = UIApplication.sharedApplication
     @app = RubyMotionQuery::App
     @vc = @app.windows.first.rootViewController
   end

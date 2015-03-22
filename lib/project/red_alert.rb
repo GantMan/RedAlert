@@ -1,4 +1,6 @@
 module RubyMotionQuery
+  # class App
+  #   class << self
   class RMQ
     include ButtonTemplates
     include AlertConstants
