@@ -116,6 +116,17 @@ class MainController < UIViewController
           end
         end
 
+        acs.append(UIButton, :alert_controller_okcancel).on(:tap) do
+         rmq.alert(message: "Log Out?", actions: :ok_cancel) do |title|
+            case title
+            when :ok
+              puts "Fictitiously logging you out"
+            when :cancel
+              puts "You hit cancel"
+            end
+          end
+        end
+
         acs.append(UIButton, :alert_controller_deletecancel).on(:tap) do
          rmq.alert(title: "DESTROY!!!", message: "Would you like to remove some important data?", actions: :delete_cancel) do |title|
             case title
@@ -126,6 +137,7 @@ class MainController < UIViewController
             end
           end
         end
+
 
       end.resize_frame_to_fit_subviews(bottom: 10, right: -5)
 

@@ -100,6 +100,12 @@ class MainStylesheet < ApplicationStylesheet
     st.text = ":yes_no_cancel Template :sheet"
   end
 
+
+  def alert_controller_okcancel st
+    basic_button(st)
+    st.text = ":ok_cancel Template"
+  end
+
   def alert_controller_deletecancel st
     basic_button(st)
     st.text = ":delete_cancel Template"
