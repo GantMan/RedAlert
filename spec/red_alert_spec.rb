@@ -1,6 +1,6 @@
 describe 'RedAlert' do
 
-  TEST_DELAY = 0.5
+  TEST_DELAY = 0.3
   before do
     UIView.setAnimationsEnabled false
     @vc = rmq.view_controller
