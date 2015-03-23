@@ -24,6 +24,7 @@ Add the **RedAlert** gem to your Gemfile.
 ```
 
 ## Usage
+**Note:  If you're using [RedPotion](https://github.com/infinitered/redpotion) then `rmq.app` can be accessed by simply typing `app`, so `rmq.app.alert` would be simply `app.alert`.  The following examples are verbose and assume only [RMQ](https://github.com/infinitered/rmq).**
 
 ```ruby
 
@@ -82,6 +83,26 @@ _More to come:_ be sure to submit a pull-request with your button template needs
 Feel free to read up on UIAlertController to see what all is wrapped up in this gem.
 * [Hayageek](http://hayageek.com/uialertcontroller-example-ios/)
 * [NSHipster](http://nshipster.com/uialertcontroller/)
+
+## Classic UIAlertView Helpers
+
+If you'd like to still support pre-iOS8, you can easily use `rmq.app.alert_view` with a similar syntax, and instead of actions you'll used the predefined delegates.
+
+**`UIAlertView` Classic:**
+```ruby
+  # support the elderly
+  rmq.app.alert_view("Hey look at this old trick")
+ 
+  # Still feels like magic!
+  rmq.app.alert_view({
+    title: "Hey There",
+    message: "Check out this complex alert!",
+    cancel_button: 'Nevermind',
+    other_buttons: ['Log In'],
+    delegate: nil,
+    view_style: UIAlertViewStyleLoginAndPasswordInput
+  })  
+```
 
 ## Contributing
 
