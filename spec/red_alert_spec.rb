@@ -11,19 +11,19 @@ describe 'RedAlert' do
   end
 
   it 'should return the created alert controller' do
-    basic_alert_controller = @vc.rmq.alert(message: 'simple message', show_now: false)
+    basic_alert_controller = @vc.rmq.app.alert(message: 'simple message', show_now: false)
     basic_alert_controller.is_a?(UIAlertController).should.be.true
   end
 
   it 'has a collection view in the created alert' do
-    basic_alert_controller = @vc.rmq.alert(message: 'simple message', show_now: false)
+    basic_alert_controller = @vc.rmq.app.alert(message: 'simple message', show_now: false)
     basic_alert_controller.rmq(UICollectionView).size.should == 1
   end
 
   describe "default alert" do
 
     before do
-      @basic_alert_controller = @vc.rmq.alert(message: 'my message')
+      @basic_alert_controller = @vc.rmq.app.alert(message: 'my message')
     end
 
     it 'has the correct values in the right places' do
@@ -39,7 +39,7 @@ describe 'RedAlert' do
 
   describe ":yes_no template" do
     before do
-      @yes_no_controller = rmq.alert(message: 'yes_no', actions: :yes_no, show_now: false)
+      @yes_no_controller = rmq.app.alert(message: 'yes_no', actions: :yes_no, show_now: false)
       wait TEST_DELAY do
         rmq.view_controller.presentViewController(@yes_no_controller, animated: false, completion: nil)
       end
@@ -61,7 +61,7 @@ describe 'RedAlert' do
 
   describe ":yes_no_cancel template" do
     before do
-      @yes_no_cancel_controller = rmq.alert(message: 'yes_no_cancel', actions: :yes_no_cancel, show_now: false)
+      @yes_no_cancel_controller = rmq.app.alert(message: 'yes_no_cancel', actions: :yes_no_cancel, show_now: false)
       wait TEST_DELAY do
         rmq.view_controller.presentViewController(@yes_no_cancel_controller, animated: false, completion: nil)
       end
@@ -84,7 +84,7 @@ describe 'RedAlert' do
 
   describe ":ok_cancel template" do
     before do
-      @ok_cancel = rmq.alert(title: "ok_cancel title", message: 'ok_cancel', actions: :ok_cancel, show_now: false)
+      @ok_cancel = rmq.app.alert(title: "ok_cancel title", message: 'ok_cancel', actions: :ok_cancel, show_now: false)
       wait TEST_DELAY do
         rmq.view_controller.presentViewController(@ok_cancel, animated: false, completion: nil)
       end
@@ -106,7 +106,7 @@ describe 'RedAlert' do
 
   describe ":delete_cancel template" do
     before do
-      @delete_cancel = rmq.alert(title: "delete_cancel title", message: 'delete_cancel', actions: :delete_cancel, show_now: false)
+      @delete_cancel = rmq.app.alert(title: "delete_cancel title", message: 'delete_cancel', actions: :delete_cancel, show_now: false)
       wait TEST_DELAY do
         rmq.view_controller.presentViewController(@delete_cancel, animated: false, completion: nil)
       end
