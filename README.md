@@ -28,23 +28,23 @@ Add the **RedAlert** gem to your Gemfile.
 ```ruby
 
   # Simply do an alert
-  rmq.alert("Minimal Alert")
+  rmq.app.alert("Minimal Alert")
 
   # Alert with callback
-  rmq.alert("Alert with Block") {
+  rmq.app.alert("Alert with Block") {
     puts "Alert with Block worked!"
   }
 
   # Modify some snazzy options
-  rmq.alert(title: "New Title", message: "Great message", animated: false)
+  rmq.app.alert(title: "New Title", message: "Great message", animated: false)
 
   # Switch it to look like an ActionSheet by setting the style
-  rmq.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet) do |action_type|
+  rmq.app.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet) do |action_type|
     puts "You clicked #{action_type}"
   end
 
   # Utilize common templates
-  rmq.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |action_type|
+  rmq.app.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |action_type|
     case action_type
     when :yes
       puts "Here's your Sandwich!"
@@ -57,14 +57,14 @@ Add the **RedAlert** gem to your Gemfile.
 You can even use the `make_button` helper to create custom UIAction buttons to add:
 ```ruby
   # Use custom UIAction buttons and add them
-  taco = rmq.make_button("Taco") {
+  taco = rmq.app.make_button("Taco") {
             puts "Taco pressed"
           }
-  nacho = rmq.make_button(title: "Nacho", style: :destructive)  {
+  nacho = rmq.app.make_button(title: "Nacho", style: :destructive)  {
             puts "Nacho pressed"
           }
   button_list = [taco, nacho]
-  rmq.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
+  rmq.app.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
 ```
 
 ## Available Templates

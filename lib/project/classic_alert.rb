@@ -1,13 +1,13 @@
 module RubyMotionQuery
-  class RMQ
+  class App
 
     # Creates and shows the old UIAlertView.  Added here for use in fallback.
     # Fallback won't run actions, but the old system needed delegates anyhow.
     # Usage Example:
-    #   rmq.alert_view("This is a test")
-    #   rmq.alert_view(title: "Hey there", message: "Enjoying this?")
+    #   rmq.app.alert_view("This is a test")
+    #   rmq.app.alert_view(title: "Hey there", message: "Enjoying this?")
     # @return [UIAlertView]
-    def alert_view(opts = {})
+    def self.alert_view(opts = {})
 
       # shortcut sending a string
       opts = {message: opts} if opts.is_a? String
