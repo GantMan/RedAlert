@@ -4,8 +4,8 @@ module RubyMotionQuery
 
       # Creates and shows the UIAlertController.
       # Usage Example:
-      #   rmq.alert(message: "This is a test")
-      #   rmq.alert(title: "Hey there", message: "Are you happy?")
+      #   rmq.app.alert(message: "This is a test")
+      #   rmq.app.alert(title: "Hey there", message: "Are you happy?")
       # @return [UIAlertController]
       def alert(opts = {}, &block)
         # Shortcut: assume a string is the message
@@ -14,7 +14,7 @@ module RubyMotionQuery
         # An alert is nothing without a message
         raise(ArgumentError, "RedAlert alert requires a message") if RubyMotionQuery::RMQ.is_blank?(opts[:message])
         # iOS8 and above only for UIAlertController
-        raise "RedAlert requires iOS8 for alerts.  Please try `rmq.alert_view`" unless rmq.device.ios_at_least? 8
+        raise "RedAlert requires iOS8 for alerts.  Please try `rmq.app.alert_view`" unless rmq.device.ios_at_least? 8
         core_alert(opts, &block)
       end
 
