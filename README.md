@@ -1,8 +1,8 @@
 <img src="./_art/logo.png" alt="RedAlert Logo" width="100" />
-[![image](http://ir_wp.s3.amazonaws.com/wp-content/uploads/sites/19/2014/09/rmq_plugin.png)](http://rubymotionquery.com)
+[![image](http://ir_wp.s3.amazonaws.com/wp-content/uploads/sites/19/2014/09/rmq_plugin.png)](http://rubymotionquery.com) 
 
 # RedAlert
-[![Gem Version](https://badge.fury.io/rb/RedAlert.svg)](http://badge.fury.io/rb/RedAlert) _Alerts and ActionSheets with ease_
+[![Gem Version](https://badge.fury.io/rb/RedAlert.svg)](http://badge.fury.io/rb/RedAlert) [![Build Status](https://travis-ci.org/GantMan/RedAlert.svg)](https://travis-ci.org/GantMan/RedAlert) _Alerts and ActionSheets with ease_
 
 ### Did you know that UIAlertView and UIActionSheet (as well as their respective delegate protocols) are deprecated in iOS 8?
 
