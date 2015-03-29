@@ -11,6 +11,6 @@ require 'ruby_motion_query'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.identifier = 'com.TODO.red_alert'
+  app.identifier = 'com.gantlaborde.red_alert'
   app.name = 'RedAlert'
 end
