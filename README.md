@@ -80,6 +80,8 @@ _More to come:_ be sure to submit a pull-request with your button template needs
 
 ## More info
 
+**i18n support by [Mark Rickert](https://github.com/GantMan/RedAlert/pull/2)**
+
 Feel free to read up on UIAlertController to see what all is wrapped up in this gem.
 * [Hayageek](http://hayageek.com/uialertcontroller-example-ios/)
 * [NSHipster](http://nshipster.com/uialertcontroller/)
