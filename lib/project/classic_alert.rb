@@ -15,8 +15,8 @@ module RubyMotionQuery
       raise(ArgumentError, "RedAlert requires a message") if opts[:message].nil? || opts[:message].empty?
 
       opts = {
-        title: "Alert!",
-        cancel_button: "OK",
+        title: NSLocalizedString("Alert!", nil),
+        cancel_button: NSLocalizedString("OK", nil),
         other_buttons: [],
         delegate: nil,
         view_style: UIAlertViewStyleDefault,

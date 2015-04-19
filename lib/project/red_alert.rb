@@ -30,7 +30,7 @@ module RubyMotionQuery
         opts = {title: opts} if opts.is_a? String
 
         opts = {
-          title: "OK",
+          title: NSLocalizedString("OK", nil),
           style: :default,
         }.merge(opts)
 

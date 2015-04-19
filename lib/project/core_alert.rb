@@ -6,7 +6,7 @@ module RubyMotionQuery
       def core_alert(opts = {}, &block)
 
         opts = {
-          title: "Alert!",
+          title: NSLocalizedString("Alert!", nil),
           style: :alert,
           actions: [make_button(&block)],
           animated: true,
