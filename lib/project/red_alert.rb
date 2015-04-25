@@ -57,10 +57,9 @@ module RubyMotionQuery
         # --------------------------------------------
         provider.show if opts[:show_now]
 
-        # TODO: find a better way to do this ugly housekeeping
+        # TODO: find a better way to do this ugly housekeeping... right now, this never gets cleaned, so this is leaky.
         if opts[:api] == :deprecated
           @rmq_red_alert_providers ||= []
-          @rmq_red_alert_providers.clear
           @rmq_red_alert_providers << provider
         end
 
