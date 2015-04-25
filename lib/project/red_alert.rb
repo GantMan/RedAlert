@@ -12,14 +12,13 @@ module RubyMotionQuery
         # ------------------------------------
         # -- Setup sane defaults -------------
         # ------------------------------------
-        opts            = {message: opts} if opts.is_a? String
-        opts[:message]  = opts[:message] ? opts[:message].to_s : NSLocalizedString("Alert!", nil)
-        opts[:style]    = opts[:style] == :sheet ? :sheet : :alert
-        opts[:animated] = opts[:animated] || true
-        opts[:show_now] = opts[:show_now] || true
-        api             = rmq.device.ios_at_least?(8) ? :modern : :deprecated
-        api             = :deprecated if rmq.device.ios_at_least?(8) && opts[:api] == :deprecated
-        opts[:api]      = api
+        opts           = {message: opts} if opts.is_a? String
+        opts           = {style: :alert, animated: true, show_now: true}.merge(opts)
+        opts[:message] = opts[:message] ? opts[:message].to_s : NSLocalizedString("Alert!", nil)
+        opts[:style]   = :alert unless opts[:style] == :sheet
+        api            = rmq.device.ios_at_least?(8) ? :modern : :deprecated
+        api            = :deprecated if rmq.device.ios_at_least?(8) && opts[:api] == :deprecated
+        opts[:api]     = api
 
         # -----------------------------------------
         # -- Who provides the alerts? -------------
@@ -75,7 +74,7 @@ module RubyMotionQuery
       #      puts "Cancel pressed"
       #   }
       # @return [UIAlertAction]
-      def make_button(opts = {}, &block)
+      def make_button(opts={}, &block)
         AlertAction.new(opts, &block)
       end
 
