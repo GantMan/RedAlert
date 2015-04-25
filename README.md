@@ -14,7 +14,7 @@ When run on iOS 8, RedAlert uses `UIAlertController` to present alerts and sheet
 
 When run on iOS 7, RedAlert uses `UIAlertView` present alerts and `UIActionSheet` to present sheets.
 
-** :dart: RedAlert Means you don't have to worry about a thing! **
+*:dart: RedAlert Means you don't have to worry about a thing!*
 
 ## Screenshot
 
