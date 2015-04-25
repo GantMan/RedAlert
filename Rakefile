@@ -13,4 +13,5 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.identifier = 'com.gantlaborde.red_alert'
   app.name = 'RedAlert'
+  app.deployment_target = ENV["DEPLOYMENT_TARGET"] if ENV["DEPLOYMENT_TARGET"]
 end
