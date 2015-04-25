@@ -10,6 +10,6 @@ describe "Application 'red_alert'" do
   end
 
   it "has lots of buttons" do
-    @vc.rmq(UIButton).size.should > 10
+    @vc.rmq(UIButton).size.should >= 10
   end
 end

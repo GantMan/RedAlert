@@ -68,14 +68,14 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "Title and :sheet Style"
   end
 
-  def custom_actions_helper st
+  def custom_actions_helper_alert st
     basic_button(st)
-    st.text = "Custom Actions via Helper"
+    st.text = "Custom Alert Actions"
   end
 
-  def alert_controller_advanced_button st
+  def custom_actions_helper_sheet st
     basic_button(st)
-    st.text = "Using UIAlertAction"
+    st.text = "Custom Sheet Actions"
   end
 
   def usage_tour st
@@ -110,5 +110,26 @@ class MainStylesheet < ApplicationStylesheet
     basic_button(st)
     st.text = ":delete_cancel Template"
   end
+
+  def action_sheet_section st
+    st.frame = {bp: 20, w: screen_width - 5, centered: :horizontal}
+    st.border_color = color.from_rgba(0,0,0,0.5)
+    st.border_width = 1
+    st.corner_radius = 5
+    st.background_color = color.from_rgba(0, 0, 0, 0.2)
+  end
+
+  def action_sheet_title st
+    st.frame = {bp: 10, w: screen_width, h: 40}
+    st.text_alignment = :centered
+    st.number_of_lines = 2
+    st.text = "UIActionSheet Classic (Deprecated)"
+  end
+
+  def action_sheet_button st
+    basic_button(st)
+    st.text = "UIActionSheet"
+  end
+
 
 end

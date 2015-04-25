@@ -1,14 +1,18 @@
 <img src="./_art/logo.png" alt="RedAlert Logo" width="100" />
-[![image](http://ir_wp.s3.amazonaws.com/wp-content/uploads/sites/19/2014/09/rmq_plugin.png)](http://rubymotionquery.com) 
+[![image](http://ir_wp.s3.amazonaws.com/wp-content/uploads/sites/19/2014/09/rmq_plugin.png)](http://rubymotionquery.com)
 
 # RedAlert
 [![Gem Version](https://badge.fury.io/rb/RedAlert.svg)](http://badge.fury.io/rb/RedAlert) [![Build Status](https://travis-ci.org/GantMan/RedAlert.svg)](https://travis-ci.org/GantMan/RedAlert) _Alerts and ActionSheets with ease_
 
 ### Did you know that UIAlertView and UIActionSheet (as well as their respective delegate protocols) are deprecated in iOS 8?
 
-Apple requests you start using the new `UIAlertController`.  This gem is built on `UIAlertController` and RMQ, along with support for antiquated `UIAlertView`s for the gnostalgic.
+Apple requests you start using the new `UIAlertController`.  This gem is built on `UIAlertController` and RMQ, along with seemless support for antiquated `UIAlertView`s & `UIActionSheet`s for the gnostalgic.
 
 With an emphasis on ease of use, this gem allows you to quickly implement Alerts and Actionsheets in your RMQ RubyMotion applications.
+
+When run on iOS 8, RedAlert uses `UIAlertController` to present alerts and sheets.
+
+When run on iOS 7, RedAlert uses `UIAlertView` present alerts and `UIActionSheet` to present sheets.
 
 ## Screenshot
 
@@ -16,7 +20,7 @@ With an emphasis on ease of use, this gem allows you to quickly implement Alerts
 
 ## Installation
 
-**Requires RMQ 1.2.0 or later, and iOS 8 or later**
+**Requires RMQ 1.2.0 or later, and iOS 7 or later**
 
 Add the **RedAlert** gem to your Gemfile.
 ```ruby
@@ -78,33 +82,33 @@ Templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/li
 
 _More to come:_ be sure to submit a pull-request with your button template needs.
 
+
+## iOS 7 Support
+
+If you still need iOS 7, RedAlert has your back.
+
+Instead of using iOS 8's UIAlertController, RedAlert will use UIActionSheet to display your sheets and
+UIAlertView to display your views.
+
+**With little-to-no changes to your code.**
+
+Because capabilities of iOS 7 & 8 alert-components are different, just a few edge cases that might sting you:
+
+* `UIAlertView` doesn't have the concept of :destructive buttons.  These will fall back to :default.
+* `UIAlertView` cares about the order of your `:cancel` actions, so `[:ok, :cancel]` is shown different than `[:cancel, :ok]`.
+* `UIActionSheet` also cares about the order.  It's possible to put a `:cancel` first, which looks slightly awkward when shown.  Try to put `:cancel` last.
+* `UIAlertView`'s `alertViewStyles` are not available through RedAlert as they aren't compatible with iOS 8.  You'll have to call that directly.
+
+
 ## More info
 
 **i18n support by [Mark Rickert](https://github.com/GantMan/RedAlert/pull/2)**
+**iOS 7 support by Steve Kellock**
 
 Feel free to read up on UIAlertController to see what all is wrapped up in this gem.
 * [Hayageek](http://hayageek.com/uialertcontroller-example-ios/)
 * [NSHipster](http://nshipster.com/uialertcontroller/)
 
-## Classic UIAlertView Helpers
-
-If you'd like to still support pre-iOS8, you can easily use `rmq.app.alert_view` with a similar syntax, and instead of actions you'll used the predefined delegates.
-
-**`UIAlertView` Classic:**
-```ruby
-  # support the elderly
-  rmq.app.alert_view("Hey look at this old trick")
- 
-  # Still feels like magic!
-  rmq.app.alert_view({
-    title: "Hey There",
-    message: "Check out this complex alert!",
-    cancel_button: 'Nevermind',
-    other_buttons: ['Log In'],
-    delegate: nil,
-    view_style: UIAlertViewStyleLoginAndPasswordInput
-  })  
-```
 
 ## Contributing
 

@@ -1,181 +1,140 @@
+return unless rmq.device.ios_at_least?(8)
+
 describe 'RedAlert' do
 
-  TEST_DELAY = 0.3
-  before do
-    UIView.setAnimationsEnabled false
-    @vc = rmq.view_controller
-  end
+  TEST_DELAY = 0.1
 
-  after do
-    @vc.dismissViewControllerAnimated(false, completion: nil)
-  end
-
-  it 'should return the created alert controller' do
-    basic_alert_controller = @vc.rmq.app.alert(message: 'simple message', show_now: false)
-    basic_alert_controller.is_a?(UIAlertController).should.be.true
-  end
-
-  it 'has a collection view in the created alert' do
-    basic_alert_controller = @vc.rmq.app.alert(message: 'simple message', show_now: false)
-    basic_alert_controller.rmq(UICollectionView).size.should == 1
-  end
-
-  describe "default alert" do
+  describe "UIAlertController Hosted" do
 
     before do
-      @basic_alert_controller = @vc.rmq.app.alert(message: 'my message')
-    end
-
-    it 'has the correct values in the right places' do
-      # Default title
-      title = @basic_alert_controller.rmq(UILabel)[0].first.get
-      title.text.should == "Alert!"
-      # Assigned message
-      message = @basic_alert_controller.rmq(UILabel)[1].get
-      message.text.should == 'my message'
-    end
-
-  end
-
-  describe ":yes_no template" do
-    before do
-      @yes_no_controller = rmq.app.alert(message: 'yes_no', actions: :yes_no, show_now: false)
       wait TEST_DELAY do
-        rmq.view_controller.presentViewController(@yes_no_controller, animated: false, completion: nil)
-      end
-    end
-
-    it 'has the correct values for a :yes_no template' do
-      # Default title
-      @yes_no_controller .rmq(UILabel)[0].get.text.should == "Alert!"
-      # Assigned message
-      @yes_no_controller .rmq(UILabel)[1].get.text.should == 'yes_no'
-
-      # Check for the buttons
-      wait TEST_DELAY do
-        @yes_no_cancel_controller.rmq(text: "Yes").size.should == 1
-        @yes_no_cancel_controller.rmq(text: "No").size.should == 1
-      end
-    end
-  end
-
-  describe ":yes_no_cancel template" do
-    before do
-      @yes_no_cancel_controller = rmq.app.alert(message: 'yes_no_cancel', actions: :yes_no_cancel, show_now: false)
-      wait TEST_DELAY do
-        rmq.view_controller.presentViewController(@yes_no_cancel_controller, animated: false, completion: nil)
-      end
-    end
-
-    it 'has the correct values for a :yes_no_cancel template' do
-      # Default title
-      @yes_no_cancel_controller.rmq(UILabel)[0].get.text.should == "Alert!"
-      # Assigned message
-      @yes_no_cancel_controller.rmq(UILabel)[1].get.text.should == 'yes_no_cancel'
-
-      # Check for the buttons
-      wait TEST_DELAY do
-        @yes_no_cancel_controller.rmq(text: "Yes").size.should == 1
-        @yes_no_cancel_controller.rmq(text: "No").size.should == 1
-        @yes_no_cancel_controller.rmq(text: "Cancel").size.should == 1
-      end
-    end
-  end
-
-  describe ":ok_cancel template" do
-    before do
-      @ok_cancel = rmq.app.alert(title: "ok_cancel title", message: 'ok_cancel', actions: :ok_cancel, show_now: false)
-      wait TEST_DELAY do
-        rmq.view_controller.presentViewController(@ok_cancel, animated: false, completion: nil)
-      end
-    end
-
-    it 'has the correct values for a :ok_cancel template' do
-      # Default title
-      @ok_cancel.rmq(UILabel)[0].get.text.should == "ok_cancel title"
-      # Assigned message
-      @ok_cancel.rmq(UILabel)[1].get.text.should == 'ok_cancel'
-
-      # Check for the buttons
-      wait TEST_DELAY do
-        @ok_cancel.rmq(text: "OK").size.should == 1
-        @ok_cancel.rmq(text: "Cancel").size.should == 1
-      end
-    end
-  end
-
-  describe ":delete_cancel template" do
-    before do
-      @delete_cancel = rmq.app.alert(title: "delete_cancel title", message: 'delete_cancel', actions: :delete_cancel, show_now: false)
-      wait TEST_DELAY do
-        rmq.view_controller.presentViewController(@delete_cancel, animated: false, completion: nil)
-      end
-    end
-
-    it 'has the correct values for a :delete_cancel template' do
-      # Default title
-      @delete_cancel.rmq(UILabel)[0].get.text.should == "delete_cancel title"
-      # Assigned message
-      @delete_cancel.rmq(UILabel)[1].get.text.should == 'delete_cancel'
-
-      # Check for the buttons
-      wait TEST_DELAY do
-        @delete_cancel.rmq(text: "Delete").size.should == 1
-        @delete_cancel.rmq(text: "Cancel").size.should == 1
-      end
-    end
-  end
-
-  describe "i18n capability" do
-    class French
-      class << self
-        attr_writer :enabled
-
-        def enabled?
-          @enabled || false
-        end
-      end
-    end
-
-
-    class Kernel
-      def NSLocalizedString(key, comment)
-        if French.enabled?
-          path =  NSBundle.mainBundle.pathForResource('fr', ofType:"lproj" )
-          bundle = NSBundle.bundleWithPath(path)
-          bundle.localizedStringForKey(key, value:comment, table:nil)
-        else
-          key
-        end
-      end
-    end
-
-    before do
-      French.enabled = true
-
-      @yes_no_cancel_controller = rmq.app.alert(message: 'yes_no_cancel', actions: :yes_no_cancel, show_now: false)
-      wait TEST_DELAY do
-        rmq.view_controller.presentViewController(@yes_no_cancel_controller, animated: false, completion: nil)
+        UIView.setAnimationsEnabled false
+        @vc = rmq.view_controller
+        @provider = rmq.app.alert(message: "hello", show_now: false, animated: false)
       end
     end
 
     after do
-      French.enabled = false
     end
 
-    it 'has the correct values for a :yes_no_cancel template' do
-      # Default title
-      @yes_no_cancel_controller.rmq(UILabel)[0].get.text.should == "Alerte!"
-      # Assigned message
-      @yes_no_cancel_controller.rmq(UILabel)[1].get.text.should == 'yes_no_cancel'
+    it "uses the proper provider class" do
+      @provider.class.should == RubyMotionQuery::AlertControllerProvider
+    end
 
-      # Check for the buttons
+    it "has access to the UIAlertController" do
+      @provider.alert_controller.class.should == UIAlertController
+    end
+
+    it "has the proper visibility timing" do
+      rmq.view_controller.should == @vc
+      @provider.show
       wait TEST_DELAY do
-        @yes_no_cancel_controller.rmq(text: "Oui").size.should == 1
-        @yes_no_cancel_controller.rmq(text: "Pas").size.should == 1
-        @yes_no_cancel_controller.rmq(text: "Annuler").size.should == 1
+        rmq.view_controller.should.not == @vc
+        @vc.dismissViewControllerAnimated(false, completion: nil)
+        wait TEST_DELAY do
+          rmq.view_controller.should == @vc
+        end
       end
     end
+
+    it "has the correct title" do
+      @provider.alert_controller.title.should == nil
+    end
+
+    it "has the correct message" do
+      @provider.alert_controller.message.should == "hello"
+    end
+
+  end
+
+  describe "UIActionSheet Hosted" do
+
+    before do
+      wait TEST_DELAY do
+        UIView.setAnimationsEnabled false
+        @vc = rmq.view_controller
+        @provider = rmq.app.alert(message: "hello", show_now: false, animated: false, style: :sheet, api: :deprecated)
+      end
+    end
+
+    it "uses the proper provider" do
+      @provider.class.should == RubyMotionQuery::ActionSheetProvider
+    end
+
+    it "has access to the UIActionSheet" do
+      @provider.action_sheet.class.should == UIActionSheet
+    end
+
+    it "has a valid blank title" do
+      rmq.app.alert(show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "Alert!"
+    end
+
+    it "has a valid title when given" do
+      rmq.app.alert(title: "hi", show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "hi"
+    end
+
+    it "should transfer message over to title when there is no title" do
+      rmq.app.alert(message: "hi", show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "hi"
+    end
+
+    it "should never overwrite title with message" do
+      rmq.app.alert(title: "1", message: "2", show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "1"
+    end
+
+    it "should be visible at the right time" do
+      # TODO: why doesn't the action_sheet.visible work?
+      @provider.action_sheet.isVisible.should == false
+      @provider.show
+      wait TEST_DELAY do
+        @provider.action_sheet.isVisible.should == true
+        @provider.action_sheet.dismissWithClickedButtonIndex(0, animated:false)
+        wait TEST_DELAY do
+          @provider.action_sheet.isVisible.should == false
+        end
+      end
+    end
+
+  end
+
+  describe "UIAlertView Hosted" do
+
+    before do
+      wait TEST_DELAY do
+        UIView.setAnimationsEnabled false
+        @vc = rmq.view_controller
+        @provider = rmq.app.alert(title: "hi!", message: "hello", show_now: false, animated: false, style: :alert, api: :deprecated)
+      end
+    end
+
+    it "uses the proper provider" do
+      @provider.class.should == RubyMotionQuery::AlertViewProvider
+    end
+
+    it "should have access to the UIAlertView" do
+      @provider.alert_view.class.should == UIAlertView
+    end
+
+    it "should should be visible at the right time" do
+      # TODO: why doesn't the alert_view.visible work?
+      @provider.alert_view.isVisible.should == false
+      @provider.show
+      wait TEST_DELAY do
+        @provider.alert_view.isVisible.should == true
+        @provider.alert_view.dismissWithClickedButtonIndex(0, animated:false)
+        wait TEST_DELAY do
+          @provider.alert_view.isVisible.should == false
+        end
+      end
+    end
+
+    it "has the correct title" do
+      @provider.alert_view.title.should == "hi!"
+    end
+
+    it "has the correct message" do
+      @provider.alert_view.message.should == "hello"
+    end
+
   end
 
 end
