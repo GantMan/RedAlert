@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-VERSION = "0.3"
+VERSION = "1.0.0"
 
 Gem::Specification.new do |spec|
   spec.name          = "RedAlert"
   spec.version       = VERSION
   spec.authors       = ["Gant"]
   spec.email         = ["GantMan@gmail.com"]
-  spec.description   = "RMQ Plugin adds efficient and dynamic alerts/sheets for RubyMotion"
-  spec.summary       = "RMQ Plugin adds efficient and dynamic alerts/sheets for RubyMotion."
+  spec.description   = "RMQ Plugin adds efficient and dynamic alerts/sheets for RubyMotion for iOS 7 & 8"
+  spec.summary       = "RMQ Plugin adds efficient and dynamic alerts/sheets for RubyMotion for iOS 7 & 8."
   spec.homepage      = "https://github.com/GantMan/RedAlert"
   spec.license       = "MIT"
 
