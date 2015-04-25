@@ -1,29 +1,29 @@
 describe "AlertAction" do
 
-  A = RubyMotionQuery::AlertAction
+  aa = RubyMotionQuery::AlertAction
 
   describe "#style" do
 
     it "should default to :default" do
-      A.new.style.should == :default
+      aa.new.style.should == :default
     end
 
     it "should prevent rogue choices" do
-      A.new(style: 'lol').style.should == :default
-      A.new(style: :lol).style.should == :default
-      A.new(style: nil).style.should == :default
+      aa.new(style: 'lol').style.should == :default
+      aa.new(style: :lol).style.should == :default
+      aa.new(style: nil).style.should == :default
     end
 
     it "should only allow valid choices" do
-      A::VALID_STYLES.each do |x|
-        A.new(style: x).style.should == x
+      RubyMotionQuery::AlertAction::VALID_STYLES.each do |x|
+        aa.new(style: x).style.should == x
       end
     end
 
     it "should know the convenience boolean getters" do
-      A.new(style: :default).default?.should == true
-      A.new(style: :destructive).destructive?.should == true
-      A.new(style: :cancel).cancel?.should == true
+      aa.new(style: :default).default?.should == true
+      aa.new(style: :destructive).destructive?.should == true
+      aa.new(style: :cancel).cancel?.should == true
     end
 
   end
@@ -31,15 +31,15 @@ describe "AlertAction" do
   describe "#title" do
 
     it "should remember our selection" do
-      A.new(title: "foo").title.should == "foo"
+      aa.new(title: "foo").title.should == "foo"
     end
 
     it "should default to OK" do
-      A.new.title.should == "OK"
+      aa.new.title.should == "OK"
     end
 
     it "should be set when we new up with a string" do
-      A.new("hi").title.should == "hi"
+      aa.new("hi").title.should == "hi"
     end
 
   end
@@ -47,19 +47,19 @@ describe "AlertAction" do
   describe "#tag" do
 
     it "should pickup the default from the title" do
-      A.new(title: "foo").tag.should == :foo
+      aa.new(title: "foo").tag.should == :foo
     end
 
     it "should not be overriden by a title when set" do
-      A.new(title: "foo", tag: :bar).tag.should == :bar
+      aa.new(title: "foo", tag: :bar).tag.should == :bar
     end
 
     it "should down case titles" do
-      A.new(title: "FOO").tag.should == :foo
+      aa.new(title: "FOO").tag.should == :foo
     end
 
     it "should camel case titles" do
-      A.new(title: "happy fun ball").tag.should == :happy_fun_ball
+      aa.new(title: "happy fun ball").tag.should == :happy_fun_ball
     end
 
   end
