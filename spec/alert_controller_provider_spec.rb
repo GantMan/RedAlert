@@ -11,13 +11,11 @@ describe "RubyMotionQuery" do
     end
 
     it "should prevent nil actions" do
-      oops = @p.build(nil) rescue :oops
-      oops.should == :oops
+      Proc.new { @p.build(nil) }.should.raise(ArgumentError)
     end
 
     it "should prevent empty actions" do
-      oops = @p.build([]) rescue :oops
-      oops.should == :oops
+      Proc.new { @p.build([]) }.should.raise(ArgumentError)
     end
 
     describe "alert controller with ok button" do

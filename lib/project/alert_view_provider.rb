@@ -6,7 +6,7 @@ module RubyMotionQuery
     attr_accessor :alert_view
 
     def build(actions, opts={})
-      raise "At least 1 action is required." unless actions && actions.length > 0
+      raise ArgumentError.new("At least 1 action is required.") unless actions && actions.length > 0
       @actions = actions
       @opts = opts
 
