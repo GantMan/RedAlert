@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-VERSION = "1.0.0"
+VERSION = "0.3"
 
 Gem::Specification.new do |spec|
   spec.name          = "RedAlert"
@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency 'ruby_motion_query', '>= 1.2.0'
+  spec.add_runtime_dependency 'ruby_motion_query', '>= 1.3.4'
   spec.add_development_dependency "rake"
 end
