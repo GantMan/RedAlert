@@ -14,6 +14,8 @@ When run on iOS 8, RedAlert uses `UIAlertController` to present alerts and sheet
 
 When run on iOS 7, RedAlert uses `UIAlertView` present alerts and `UIActionSheet` to present sheets.
 
+** :dart: RedAlert Means you don't have to worry about a thing! **
+
 ## Screenshot
 
 <img src="./_art/screen.png" alt="Screen Shot" width="500" />
@@ -80,7 +82,7 @@ Templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/li
 * `:ok_cancel` = OK button with a separated cancel button.
 * `:delete_cancel` = Delete button (red) with a separated cancel button.
 
-_More to come:_ be sure to submit a pull-request with your button template needs.
+:heartbeat: _More to come:_ be sure to submit a pull-request with your button template needs.
 
 
 ## iOS 7 Support
@@ -92,7 +94,7 @@ UIAlertView to display your views.
 
 **With little-to-no changes to your code.**
 
-Because capabilities of iOS 7 & 8 alert-components are different, just a few edge cases that might sting you:
+Because capabilities of iOS 7 & 8 alert-components are different, just a few edge cases that might sting you (but nothing critical):
 
 * `UIAlertView` doesn't have the concept of :destructive buttons.  These will fall back to :default.
 * `UIAlertView` cares about the order of your `:cancel` actions, so `[:ok, :cancel]` is shown different than `[:cancel, :ok]`.
@@ -103,7 +105,8 @@ Because capabilities of iOS 7 & 8 alert-components are different, just a few edg
 ## More info
 
 **i18n support by [Mark Rickert](https://github.com/GantMan/RedAlert/pull/2)**
-**iOS 7 support by Steve Kellock**
+
+**iOS 7 support by [Steve Kellock](https://github.com/GantMan/RedAlert/pull/3)**
 
 Feel free to read up on UIAlertController to see what all is wrapped up in this gem.
 * [Hayageek](http://hayageek.com/uialertcontroller-example-ios/)
@@ -116,4 +119,5 @@ Feel free to read up on UIAlertController to see what all is wrapped up in this 
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+5. Realize no one ever reads this section
+6. Create new Pull Request
