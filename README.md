@@ -16,10 +16,6 @@ When run on iOS 7, RedAlert uses `UIAlertView` present alerts and `UIActionSheet
 
 *:dart: RedAlert Means you don't have to worry about a thing!*
 
-## Screenshot
-
-<img src="./_art/screen.png" alt="Screen Shot" width="500" />
-
 ## In Action
 
 <img src="./_art/demo.gif" alt="Demo" width="369" height="677" />
