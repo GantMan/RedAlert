@@ -20,6 +20,10 @@ When run on iOS 7, RedAlert uses `UIAlertView` present alerts and `UIActionSheet
 
 <img src="./_art/screen.png" alt="Screen Shot" width="500" />
 
+## In Action
+
+<img src="./_art/demo.gif" alt="Demo" width="369" height="677" />
+
 ## Installation
 
 **Requires RMQ 1.2.0 or later, and iOS 7 or later**
