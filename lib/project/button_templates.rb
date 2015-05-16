@@ -24,17 +24,17 @@ module RubyMotionQuery
         [
           rmq.app.make_button(title: yes, tag: :yes, &block),
           rmq.app.make_button(title: no, tag: :no, &block),
-          rmq.app.make_button({title: cancel, tag: :cancel, style: :cancel}, &block)
+          rmq.app.make_button(title: cancel, tag: :cancel, style: :cancel, &block)
         ]
       when :ok_cancel
         [
-          rmq.app.make_button(ok, &block),
-          rmq.app.make_button({title: cancel, tag: :cancel, style: :cancel}, &block)
+          rmq.app.make_button(title: ok, &block),
+          rmq.app.make_button(title: cancel, tag: :cancel, style: :cancel, &block)
         ]
       when :delete_cancel
         [
-          rmq.app.make_button({title: delete, tag: :delete, style: :destructive}, &block),
-          rmq.app.make_button({title: cancel, tag: :cancel, style: :cancel}, &block)
+          rmq.app.make_button(title: delete, tag: :delete, style: :destructive, &block),
+          rmq.app.make_button(title: cancel, tag: :cancel, style: :cancel, &block)
         ]
       else
         []

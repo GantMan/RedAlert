@@ -61,6 +61,19 @@ Add the **RedAlert** gem to your Gemfile.
   end
 ```
 
+You can pass in symbols or strings and we'll build the buttons for you:
+
+```ruby
+rmq.app.alert title: "Hey!", actions: [ "Go ahead", :cancel, :delete ] do |button_tag|
+  case button_tag
+  when :cancel then puts "Canceled!"
+  when :delete then puts "Deleted!"
+  when "Go ahead" then puts "Going ahead!"
+  end
+end
+```
+
+
 You can even use the `make_button` helper to create custom UIAction buttons to add:
 ```ruby
   # Use custom UIAction buttons and add them
