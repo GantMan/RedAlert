@@ -115,11 +115,13 @@ Because capabilities of iOS 7 & 8 alert-components are different, just a few edg
 * `UIAlertView`'s `alertViewStyles` are not available through RedAlert as they aren't compatible with iOS 8.  You'll have to call that directly.
 
 
-## More info
+## Credits and Info
 
 **i18n support by [Mark Rickert](https://github.com/GantMan/RedAlert/pull/2)**
 
 **iOS 7 support by [Steve Kellock](https://github.com/GantMan/RedAlert/pull/3)**
+
+**Automatic button building by [Jamon Holmgren](https://github.com/GantMan/RedAlert/pull/7)**
 
 Feel free to read up on UIAlertController to see what all is wrapped up in this gem.
 * [Hayageek](http://hayageek.com/uialertcontroller-example-ios/)
