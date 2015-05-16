@@ -39,7 +39,7 @@ module RubyMotionQuery
         actions = []
         if opts[:actions] && opts[:actions].is_a?(Array) && opts[:actions].length > 0
           # caller has pre-defined actions
-          actions << opts[:actions]
+          actions << map_action_buttons(opts[:actions], &block)
         elsif opts[:actions] && opts[:actions].is_a?(Symbol)
           # caller wants a template
           actions << add_template_actions(opts[:actions], &block)
@@ -75,6 +75,31 @@ module RubyMotionQuery
       # @return [UIAlertAction]
       def make_button(opts={}, &block)
         AlertAction.new(opts, &block)
+      end
+
+      # Returns an array of action buttons based on the symbols you pass in.
+      # Usage Example:
+      #   rmq.app.alert title: "Hey!", actions: [ "Go ahead", :cancel, :delete ] do |button_tag|
+      #     puts "#{button_text} pressed"
+      #   end
+      def map_action_buttons(buttons, &block)
+        yes    = NSLocalizedString("Yes", nil)
+        no     = NSLocalizedString("No", nil)
+        cancel = NSLocalizedString("Cancel", nil)
+        ok     = NSLocalizedString("OK", nil)
+        delete = NSLocalizedString("Delete", nil)
+
+        buttons.map do |button|
+          case button
+          when :cancel  then make_button(title: cancel, tag: :cancel, style: :cancel, &block)
+          when :yes     then make_button(title: yes, tag: :yes, &block)
+          when :no      then make_button(title: no, tag: :no, &block)
+          when :ok      then make_button(title: ok, tag: :ok, &block)
+          when :delete  then make_button(title: delete, tag: :delete, style: :destructive, &block)
+          when String   then make_button(title: button, tag: button, &block)
+          else button
+          end
+        end
       end
 
     end # close eigenclass
