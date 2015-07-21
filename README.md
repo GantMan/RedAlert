@@ -50,6 +50,18 @@ Add the **RedAlert** gem to your Gemfile.
     puts "You clicked #{action_type}"
   end
 
+  # Add input fields by setting the style
+  rmq.app.alert(title: "Text Field", message: "My style is :login", style: :login) do |action_type, fields|
+    puts "you entered '#{fields[:login].text}' as the login and '#{fields[:password].text}' as the password"
+  end
+
+  # Add input fields with settings for placeholder text, whether the field is secure, and the keyboard type by setting the style to :custom
+  rmq.app.alert(title: "Text Field", message: "My style is :custom", style: :custom, fields:
+               {phone: {placeholder: 'Phone', keyboard_type: :phone_pad},
+                email: {placeholder: 'Email', secure: false, keyboard_type: :email_address}}) do |action_type, fields|
+    puts "you entered '#{fields[:phone].text}' and '#{fields[:email].text}'"
+  end
+
   # Utilize common templates
   rmq.app.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |action_type|
     case action_type
@@ -89,11 +101,17 @@ You can even use the `make_button` helper to create custom buttons to add:
 
 ## Available Templates
 
-Templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/lib/project/button_templates.rb)
+Button templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/lib/project/button_templates.rb)
 * `:yes_no` = Simple yes and no buttons.
 * `:yes_no_cancel` = Yes/no buttons with a separated cancel button.
 * `:ok_cancel` = OK button with a separated cancel button.
 * `:delete_cancel` = Delete button (red) with a separated cancel button.
+
+Field templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/lib/project/field_templates.rb)
+* `:input` = One plaintext input field.
+* `:secure` = One secure input field.
+* `:login` = Two fields, one plaintext with placeholder text 'Login' and the other secure with placeholder text 'Password'.
+* `:change_password` = Two fields, one secure with placeholder text 'Current Password' and the other secure with placeholder text 'New Password'.
 
 :heartbeat: _More to come:_ be sure to submit a pull-request with your button template needs.
 
@@ -113,7 +131,7 @@ Because capabilities of iOS 7 & 8 alert-components are different, just a few edg
 * `UIAlertView` cares about the order of your `:cancel` actions, so `[:ok, :cancel]` is shown different than `[:cancel, :ok]`.
 * `UIActionSheet` also cares about the order.  It's possible to put a `:cancel` first, which looks slightly awkward when shown.  Try to put `:cancel` last.
 * `UIAlertView`'s `alertViewStyles` are not available through RedAlert as they aren't compatible with iOS 8.  You'll have to call that directly.
-
+* `UIAlertView only supports up to 2 input fields.`
 
 ## Credits and Info
 
