@@ -2,6 +2,11 @@ module RubyMotionQuery
   class App
     class << self
 
+      TEMPLATE_FIELD_STYLES = [:input, :secure, :change_password, :login]
+      ALL_FIELD_STYLES = TEMPLATE_FIELD_STYLES + [:custom]
+      ALERT_STYLES = ALL_FIELD_STYLES + [:alert]
+      VALID_STYLES = ALERT_STYLES + [:sheet]
+
       # Creates and shows the UIAlertController (iOS 8) or UIAlertView/UIActionSheet (iOS 7).
       # Usage Example:
       #   rmq.app.alert(message: "This is a test")
@@ -15,7 +20,8 @@ module RubyMotionQuery
         opts           = {message: opts} if opts.is_a? String
         opts           = {style: :alert, animated: true, show_now: true}.merge(opts)
         opts[:message] = opts[:message] ? opts[:message].to_s : NSLocalizedString("Alert!", nil)
-        opts[:style]   = :alert unless opts[:style] == :sheet
+        opts[:style]   = VALID_STYLES.include?(opts[:style]) ? opts[:style] : :alert
+        opts[:fields]  = opts[:style] == :custom && opts[:fields] ? opts[:fields] : {text: {placeholder: ''}}
         api            = rmq.device.ios_at_least?(8) ? :modern : :deprecated
         api            = :deprecated if rmq.device.ios_at_least?(8) && opts[:api] == :deprecated
         opts[:api]     = api
@@ -23,15 +29,30 @@ module RubyMotionQuery
         # -----------------------------------------
         # -- Who provides the alerts? -------------
         # -----------------------------------------
+
         if opts[:api] == :modern
           provider = AlertControllerProvider.new
         else
-          if opts[:style] == :alert
+          if ALERT_STYLES.include?(opts[:style])
             provider = AlertViewProvider.new
           else
             provider = ActionSheetProvider.new
           end
         end
+
+        # -------------------------------------------------
+        # -- Configure the input fields --------------
+        # -------------------------------------------------
+
+        fieldset = {alert_view_style: UIAlertViewStyleDefault, fields: []}
+
+        if TEMPLATE_FIELD_STYLES.include?(opts[:style])
+          fieldset = add_template_fieldset(opts[:style])
+        elsif opts[:style] == :custom
+          fieldset = custom_fieldset(opts[:api], opts[:fields])
+        end
+
+        opts[:style] = :alert if ALL_FIELD_STYLES.include?(opts[:style])
 
         # -------------------------------------------------
         # -- Configure the actions (choices) --------------
@@ -50,7 +71,7 @@ module RubyMotionQuery
           # no actions & no block makes alerts a dull boy
           actions << [AlertAction.new(NSLocalizedString("OK", nil))]
         end
-        provider.build(actions.flatten.compact, opts)
+        provider.build(actions.flatten.compact, fieldset, opts)
 
         # --------------------------------------------
         # -- Show the modal right away? --------------
@@ -66,13 +87,44 @@ module RubyMotionQuery
         provider
       end # alert
 
-      # Returns a UIAlertAction from given parameters
+      def custom_fieldset(api_version = :modern, fields)
+        raise ArgumentError.new "At least one field must be provided for a custom style" unless fields && fields.count > 0
+        fieldset = {alert_view_style: UIAlertViewStyleDefault, fields: [] }
+        if api_version == :deprecated
+          case fields.count
+            when 1
+              fieldset[:alert_view_style] = UIAlertViewStylePlainTextInput
+            when 2
+              fieldset[:alert_view_style] = UIAlertViewStyleLoginAndPasswordInput
+            else
+              raise ArgumentError.new "When running iOS < 8, up to two fields can be provided for a custom style"
+          end
+        end
+        alert_fields = []
+        fields.each do |k, v|
+          alert_fields << AlertField.new(k, v)
+        end
+        fieldset[:fields] = alert_fields
+        fieldset
+      end
+
+      # Returns an AlertField from given parameters
+      # Usage Example:
+      #   login = rmq.make_field("Login")
+      #   password = rmq.make_field(:password, secure: true, placeholder: 'Password')
+      # @return [AlertField]
+
+      def make_field(name, opts={})
+        AlertField.new(name, opts)
+      end
+
+      # Returns an AlertAction from given parameters
       # Usage Example:
       #   yes = rmq.make_button("Yes")
       #   cancel = rmq.make_button(title: "Cancel", style: :cancel) {
       #      puts "Cancel pressed"
       #   }
-      # @return [UIAlertAction]
+      # @return [AlertAction]
       def make_button(opts={}, &block)
         AlertAction.new(opts, &block)
       end

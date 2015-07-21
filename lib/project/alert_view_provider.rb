@@ -5,7 +5,7 @@ module RubyMotionQuery
 
     attr_accessor :alert_view
 
-    def build(actions, opts={})
+    def build(actions, fieldset=nil, opts={})
       raise ArgumentError.new("At least 1 action is required.") unless actions && actions.length > 0
       @actions = actions
       @opts = opts
@@ -26,6 +26,20 @@ module RubyMotionQuery
       # mark where our special buttons are
       @alert_view.cancelButtonIndex = @actions_in_display_order.length-1 if cancel_action
 
+      # add our text fields and build up the callback hash
+      @text_fields = {}
+
+      if fieldset
+        @alert_view.alertViewStyle = fieldset[:alert_view_style]
+        fieldset[:fields].each_with_index do |field, index|
+          text_field = @alert_view.textFieldAtIndex index
+          text_field.placeholder = field.placeholder
+          text_field.secureTextEntry = field.secure_text_entry
+          text_field.keyboardType = RubyMotionQuery::Stylers::KEYBOARD_TYPES[field.keyboard_type]
+          @text_fields[field.name] = text_field
+        end
+      end
+
       self
     end
 
@@ -41,7 +55,7 @@ module RubyMotionQuery
     def alertView(alertView, didDismissWithButtonIndex:buttonIndex)
       @view_controller.dismissViewControllerAnimated @opts[:animated], completion: nil
       action = @actions_in_display_order[buttonIndex]
-      action.handler.call(action.tag) if action.handler
+      action.handler.call(action.tag, @text_fields) if action.handler
       @view_controller = nil # forget the reference
     end
 

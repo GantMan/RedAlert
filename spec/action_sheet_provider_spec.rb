@@ -19,7 +19,7 @@ describe "RubyMotionQuery" do
     describe "action sheet with ok button" do
 
       before do
-        @p.build [@ok], title: "title"
+        @p.build [@ok], nil, title: "title"
       end
 
       it "should have the right title" do
@@ -51,7 +51,7 @@ describe "RubyMotionQuery" do
     describe "action sheet with a cancel button" do
 
       before do
-        @p.build [@cancel], title: "title"
+        @p.build [@cancel], nil, title: "title"
       end
 
       it "should have 1 button" do
@@ -75,7 +75,7 @@ describe "RubyMotionQuery" do
     describe "action sheet with a destructive button" do
 
       before do
-        @p.build [@boom], title: "title"
+        @p.build [@boom], nil, title: "title"
       end
 
       it "should have 1 button" do

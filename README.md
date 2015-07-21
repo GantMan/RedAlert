@@ -74,7 +74,7 @@ end
 ```
 
 
-You can even use the `make_button` helper to create custom UIAction buttons to add:
+You can even use the `make_button` helper to create custom buttons to add:
 ```ruby
   # Use custom UIAction buttons and add them
   taco = rmq.app.make_button("Taco") {

@@ -68,6 +68,31 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "Title and :sheet Style"
   end
 
+  def alert_controller_fields_one st
+    basic_button(st)
+    st.text = "Fields :input Style"
+  end
+
+  def alert_controller_fields_two st
+    basic_button(st)
+    st.text = "Fields :secure Style"
+  end
+
+  def alert_controller_fields_three st
+    basic_button(st)
+    st.text = "Fields :login Style"
+  end
+
+  def alert_controller_fields_four st
+    basic_button(st)
+    st.text = "Fields :change_password Style"
+  end
+
+  def alert_controller_fields_five st
+    basic_button(st)
+    st.text = "Fields :custom Style"
+  end
+
   def custom_actions_helper_alert st
     basic_button(st)
     st.text = "Custom Alert Actions"
