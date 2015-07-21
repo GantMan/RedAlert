@@ -30,7 +30,7 @@ describe 'RedAlert' do
     describe "When in Englishland" do
 
       before do
-        @ac = rmq.app.alert(message: 'yes_no_cancel', actions: :yes_no_cancel, show_now: false).alert_controller
+        @ac = rmq.app.alert(message: 'yes_no_cancel', style: :login, actions: :yes_no_cancel, show_now: false).alert_controller
       end
 
       it "should have the correct title" do
@@ -53,13 +53,21 @@ describe 'RedAlert' do
         @ac.actions[2].title.should == "Cancel"
       end
 
+      it 'should have English placeholder text for the first field' do
+        @ac.textFields[0].placeholder.should == "Login"
+      end
+
+      it 'should have English placeholder text for the second field' do
+        @ac.textFields[1].placeholder.should == "Password"
+      end
+
     end
 
     describe "When in Frenchland" do
 
       before do
         French.enabled = true
-        @ac = rmq.app.alert(message: 'yes_no_cancel', actions: :yes_no_cancel, show_now: false).alert_controller
+        @ac = rmq.app.alert(message: 'yes_no_cancel', style: :login, actions: :yes_no_cancel, show_now: false).alert_controller
       end
 
       after do
@@ -85,6 +93,15 @@ describe 'RedAlert' do
       it "should have an english Cancel button" do
         @ac.actions[2].title.should == "Annuler"
       end
+
+      it 'should have French placeholder text for the first field' do
+        @ac.textFields[0].placeholder.should == "S'identifier"
+      end
+
+      it 'should have French placeholder text for the second field' do
+        @ac.textFields[1].placeholder.should == "Mot De Passe"
+      end
+
     end
   end
 
