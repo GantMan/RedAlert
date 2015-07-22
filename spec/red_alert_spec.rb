@@ -3,6 +3,7 @@ return unless rmq.device.ios_at_least?(8)
 describe 'RedAlert' do
 
   TEST_DELAY = 0.1
+  DISMISS_ALERT_DELAY = TEST_DELAY + 0.5
 
   describe "UIAlertController Hosted" do
 
@@ -113,12 +114,9 @@ describe 'RedAlert' do
         @provider.alert_view.isVisible.should == false
         @provider.show
         wait TEST_DELAY do
-          puts "In outer 'wait' block: @provider.alert_view.isVisible.should == true: #{@provider.alert_view.isVisible.should == true}"
           @provider.alert_view.isVisible.should == true
           @provider.alert_view.dismissWithClickedButtonIndex(0, animated:false)
-          # adding a .5 second of delay for Travis CI
-          wait TEST_DELAY + 0.5 do
-            puts "In nested 'wait' block: @provider.alert_view.isVisible.should == false: #{@provider.alert_view.isVisible.should == false}"
+          wait DISMISS_ALERT_DELAY do
             @provider.alert_view.isVisible.should == false
           end
         end
