@@ -108,7 +108,7 @@ describe 'RedAlert' do
         @provider.alert_view.class.should == UIAlertView
       end
 
-      it "should should be visible at the right time" do
+      it "should be visible at the right time" do
         # TODO: why doesn't the alert_view.visible work?
         @provider.alert_view.isVisible.should == false
         @provider.show
