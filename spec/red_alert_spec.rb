@@ -110,14 +110,14 @@ describe 'RedAlert' do
 
       it "should be visible at the right time" do
         # TODO: why doesn't the alert_view.visible work?
-        puts "@provider.alert_view.isVisible.should == false: #{@provider.alert_view.isVisible.should == false}"
         @provider.alert_view.isVisible.should == false
         @provider.show
         wait TEST_DELAY do
           puts "In outer 'wait' block: @provider.alert_view.isVisible.should == true: #{@provider.alert_view.isVisible.should == true}"
           @provider.alert_view.isVisible.should == true
           @provider.alert_view.dismissWithClickedButtonIndex(0, animated:false)
-          wait TEST_DELAY do
+          # adding a .5 second of delay for Travis CI
+          wait TEST_DELAY + 0.5 do
             puts "In nested 'wait' block: @provider.alert_view.isVisible.should == false: #{@provider.alert_view.isVisible.should == false}"
             @provider.alert_view.isVisible.should == false
           end
