@@ -141,6 +141,8 @@ Because capabilities of iOS 7 & 8 alert-components are different, just a few edg
 
 **Automatic button building by [Jamon Holmgren](https://github.com/GantMan/RedAlert/pull/7)**
 
+**Ability to add textfields to alerts (Like Username/Password) by [Derek Greenberg](https://github.com/GantMan/RedAlert/pull/10) and notable work by [Jon Silverman](https://github.com/GantMan/RedAlert/pull/9)**
+
 Feel free to read up on UIAlertController to see what all is wrapped up in this gem.
 * [Hayageek](http://hayageek.com/uialertcontroller-example-ios/)
 * [NSHipster](http://nshipster.com/uialertcontroller/)
