@@ -5,7 +5,7 @@ module RubyMotionQuery
 
     attr_reader :action_sheet
 
-    def build(actions, opts={})
+    def build(actions, fieldset=nil, opts={})
       raise ArgumentError.new "At least 1 action is required." unless actions && actions.length > 0
       @actions = actions
       @opts = opts
@@ -53,7 +53,7 @@ module RubyMotionQuery
       # pull from the view controller instance
       @view_controller.dismissViewControllerAnimated @opts[:animated], completion: nil
       action = @actions_in_display_order[buttonIndex]
-      action.handler.call(action.tag) if action.handler
+      action.handler.call(action.tag, nil) if action.handler
       @view_controller = nil # forget the reference
     end
 

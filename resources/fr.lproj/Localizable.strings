@@ -4,3 +4,7 @@
 "OK" = "OK";
 "Delete" = "Effacer";
 "Alert!" = "Alerte!";
+"Login" = "S'identifier";
+"Password" = "Mot De Passe";
+"Current Password" = "Mot De Passe Actuel";
+"New Password" = "Nouveau Mot De Passe";

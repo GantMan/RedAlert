@@ -3,6 +3,7 @@ return unless rmq.device.ios_at_least?(8)
 describe 'RedAlert' do
 
   TEST_DELAY = 0.1
+  DISMISS_ALERT_DELAY = TEST_DELAY + 0.5
 
   describe "UIAlertController Hosted" do
 
@@ -98,41 +99,74 @@ describe 'RedAlert' do
 
   describe "UIAlertView Hosted" do
 
-    before do
-      wait TEST_DELAY do
-        UIView.setAnimationsEnabled false
-        @vc = rmq.view_controller
-        @provider = rmq.app.alert(title: "hi!", message: "hello", show_now: false, animated: false, style: :alert, api: :deprecated)
+    shared "a properly configured UIAlertView provider" do
+
+      it "uses the proper provider" do
+        @provider.class.should == RubyMotionQuery::AlertViewProvider
       end
-    end
 
-    it "uses the proper provider" do
-      @provider.class.should == RubyMotionQuery::AlertViewProvider
-    end
+      it "should have access to the UIAlertView" do
+        @provider.alert_view.class.should == UIAlertView
+      end
 
-    it "should have access to the UIAlertView" do
-      @provider.alert_view.class.should == UIAlertView
-    end
-
-    it "should should be visible at the right time" do
-      # TODO: why doesn't the alert_view.visible work?
-      @provider.alert_view.isVisible.should == false
-      @provider.show
-      wait TEST_DELAY do
-        @provider.alert_view.isVisible.should == true
-        @provider.alert_view.dismissWithClickedButtonIndex(0, animated:false)
+      it "should be visible at the right time" do
+        # TODO: why doesn't the alert_view.visible work?
+        @provider.alert_view.isVisible.should == false
+        @provider.show
         wait TEST_DELAY do
-          @provider.alert_view.isVisible.should == false
+          @provider.alert_view.isVisible.should == true
+          @provider.alert_view.dismissWithClickedButtonIndex(0, animated:false)
+          wait DISMISS_ALERT_DELAY do
+            @provider.alert_view.isVisible.should == false
+          end
         end
       end
+
+      it "has the correct title" do
+        @provider.alert_view.title.should == "hi!"
+      end
+
+      it "has the correct message" do
+        @provider.alert_view.message.should == "hello"
+      end
+
     end
 
-    it "has the correct title" do
-      @provider.alert_view.title.should == "hi!"
+    context "using an alert style" do
+
+      before do
+        wait TEST_DELAY do
+          UIView.setAnimationsEnabled false
+          @vc = rmq.view_controller
+          @provider = rmq.app.alert(title: "hi!", message: "hello", show_now: false, animated: false, style: :alert, api: :deprecated)
+        end
+      end
+
+      behaves_like "a properly configured UIAlertView provider"
+
     end
 
-    it "has the correct message" do
-      @provider.alert_view.message.should == "hello"
+    context "with a field style" do
+
+      before do
+        wait TEST_DELAY do
+          UIView.setAnimationsEnabled false
+          @vc = rmq.view_controller
+          @provider = rmq.app.alert(title: "hi!", message: "hello", show_now: false, animated: false, style: :change_password, api: :deprecated)
+        end
+      end
+
+      behaves_like "a properly configured UIAlertView provider"
+
+      it "has the expected alertViewStyle value" do
+        @provider.alert_view.alertViewStyle.should == UIAlertViewStyleLoginAndPasswordInput
+      end
+
+      it 'has the correct placeholder text for the change password template fields' do
+        @provider.alert_view.textFieldAtIndex(0).placeholder.should == "Current Password"
+        @provider.alert_view.textFieldAtIndex(1).placeholder.should == "New Password"
+      end
+
     end
 
   end

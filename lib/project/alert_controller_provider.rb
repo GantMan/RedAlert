@@ -5,7 +5,7 @@ module RubyMotionQuery
 
     attr_reader :alert_controller
 
-    def build(actions, opts={})
+    def build(actions, fieldset = nil, opts={})
       raise ArgumentError.new("At least 1 action is required.") unless actions && actions.length > 0
       @actions = actions
       @opts = opts
@@ -13,6 +13,21 @@ module RubyMotionQuery
       # create our alert controller
       style = RubyMotionQuery::AlertConstants::ALERT_TYPES[@opts[:style]]
       @alert_controller = UIAlertController.alertControllerWithTitle @opts[:title], message:@opts[:message], preferredStyle: style
+
+      # add our text fields and build up the callback hash
+      @text_fields = {}
+      if fieldset
+        fieldset[:fields].each_with_index do |field, index|
+          handler = lambda do |text_field|
+            text_field.placeholder = field.placeholder
+            text_field.secureTextEntry = field.secure_text_entry
+            text_field.keyboardType = RubyMotionQuery::Stylers::KEYBOARD_TYPES[field.keyboard_type]
+          end
+          @alert_controller.addTextFieldWithConfigurationHandler(handler)
+          @text_fields[field.name] = @alert_controller.textFields[index]
+        end
+      end
+
 
       # load up the UIAlertController's actions
       @actions.each do |alert_action|
@@ -22,10 +37,10 @@ module RubyMotionQuery
 
         # convert the callback
         handler = lambda do |action|
-          alert_action.handler.call(alert_action.tag) unless alert_action.handler.nil?
+          alert_action.handler.call(alert_action.tag, @text_fields) unless alert_action.handler.nil?
         end if alert_action.handler
 
-        # create teh action
+        # create the action
         action = UIAlertAction.actionWithTitle alert_action.title, style: ios_style, handler: handler
 
         # add it to the UIAlertController

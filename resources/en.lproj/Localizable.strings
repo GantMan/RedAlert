@@ -4,3 +4,7 @@
 "OK" = "OK";
 "Delete" = "Delete";
 "Alert!" = "Alert!";
+"Login" = "Login";
+"Password" = "Password";
+"Current Password" = "Current Password";
+"New Password" = "New Password";
