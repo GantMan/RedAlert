@@ -51,7 +51,9 @@ module RubyMotionQuery
       if @opts[:popover] and rmq.device.ipad?
         source = @opts[:popover]
         @alert_controller.setModalPresentationStyle(UIModalPresentationPopover)
-        @alert_controller.setModalInPopover(true)
+        if @opts[:modal]
+          @alert_controller.setModalInPopover(true)
+        end
         if source.is_a?(UIBarButtonItem)
           @alert_controller.popoverPresentationController.barButtonItem = source
         else
