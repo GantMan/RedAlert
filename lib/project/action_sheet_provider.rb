@@ -43,7 +43,17 @@ module RubyMotionQuery
     def show
       # when we show, the view controller will disappear because a different _UIAlertOverlayWindow window will take its place
       @view_controller = rmq.view_controller
-      @action_sheet.showInView(@view_controller.view)
+
+      if @opts[:popover] and rmq.device.ipad?
+        source = @opts[:popover]
+        if source.is_a?(UIBarButtonItem)
+          @action_sheet.showFromBarButtonItem(source, animated: true)
+        else
+          @action_sheet.showFromRect(source.frame, inView: @view_controller.view, animated: true)
+        end
+      else
+        @action_sheet.showInView(@view_controller.view)
+      end
     end
 
     private

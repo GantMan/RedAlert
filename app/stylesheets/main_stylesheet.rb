@@ -113,6 +113,11 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "Custom Sheet Actions"
   end
 
+  def alert_from_popover st
+    basic_button(st)
+    st.text = "Alert From Popover"
+  end
+
   def usage_tour st
     st.frame = {bp: 10, w: screen_width - 20, l: 10, h:20}
     st.clips_to_bounds = false

@@ -151,6 +151,11 @@ class MainController < UIViewController
           rmq.app.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list, style: :sheet)
         end
 
+        # Alert from popover
+        acs.append(UIButton, :alert_from_popover).on(:tap) do |sender|
+          rmq.app.alert(title: "Popover", message: "Presented from popover", actions: [:ok], popover: sender)
+        end
+
         acs.append(UILabel, :template_tour)
 
 

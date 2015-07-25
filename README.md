@@ -99,6 +99,15 @@ You can even use the `make_button` helper to create custom buttons to add:
   rmq.app.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
 ```
 
+
+To present your alert from a popover, you can pass a `:popover` option and provide the source (either a UIView or a UIBarButtonItem)
+```ruby
+rmq.append(UIButton, :my_button).on(:tap) do |sender|
+  rmq.app.alert(title: "Actions!", message: "Alert from a Popover.", actions: [:ok, :cancel], popover: sender)
+end
+```
+
+
 ## Available Templates
 
 Button templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/lib/project/button_templates.rb)
