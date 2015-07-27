@@ -6,7 +6,7 @@ module RubyMotionQuery
     # 2 - Add the test
     # 3 - Add symbol to the README.md list
 
-    def self.add_template_fieldset(template)
+    def self.add_template_fieldset(template, opts={})
 
       login             = NSLocalizedString("Login", nil)
       password          = NSLocalizedString("Password", nil)
@@ -19,13 +19,13 @@ module RubyMotionQuery
           fieldset[:alert_view_style] = UIAlertViewStylePlainTextInput
           fieldset[:fields] =
           [
-            rmq.app.make_field(:text, keyboard_type: :default, secure_text_entry: false, placeholder: '')
+            rmq.app.make_field(:text, keyboard_type: :default, secure_text_entry: false, placeholder: opts.fetch(:placeholder,''))
           ]
         when :secure
           fieldset[:alert_view_style] = UIAlertViewStyleSecureTextInput
           fieldset[:fields] =
             [
-              rmq.app.make_field(:text, keyboard_type: :default, secure_text_entry: true, placeholder: '')
+              rmq.app.make_field(:text, keyboard_type: :default, secure_text_entry: true, placeholder: opts.fetch(:placeholder,''))
             ]
         when :login
           fieldset[:alert_view_style] = UIAlertViewStyleLoginAndPasswordInput

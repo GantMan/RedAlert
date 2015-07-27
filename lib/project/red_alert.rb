@@ -47,7 +47,7 @@ module RubyMotionQuery
         fieldset = {alert_view_style: UIAlertViewStyleDefault, fields: []}
 
         if TEMPLATE_FIELD_STYLES.include?(opts[:style])
-          fieldset = add_template_fieldset(opts[:style])
+          fieldset = add_template_fieldset(opts[:style], opts)
         elsif opts[:style] == :custom
           fieldset = custom_fieldset(opts[:api], opts[:fields])
         end
