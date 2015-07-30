@@ -45,6 +45,13 @@ class MainController < UIViewController
           end
         end
 
+        # Sheet with no message
+        acs.append(UIButton, :alert_controller_five).on(:tap) do
+          rmq.app.alert(message: nil, style: :sheet, actions: :yes_no_cancel ) do |action_type|
+            puts "you clicked #{action_type}"
+          end
+        end
+
         ##############################
         #  Field examples
         ##############################

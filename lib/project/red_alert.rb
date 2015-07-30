@@ -19,7 +19,13 @@ module RubyMotionQuery
         # ------------------------------------
         opts           = {message: opts} if opts.is_a? String
         opts           = {style: :alert, animated: true, show_now: true}.merge(opts)
-        opts[:message] = opts[:message] ? opts[:message].to_s : NSLocalizedString("Alert!", nil)
+
+        opts[:message] = if opts.has_key?(:message)
+          opts[:message].nil? ? nil : opts[:message].to_s
+        else
+          NSLocalizedString("Alert!", nil)
+        end
+
         opts[:style]   = VALID_STYLES.include?(opts[:style]) ? opts[:style] : :alert
         opts[:fields]  = opts[:style] == :custom && opts[:fields] ? opts[:fields] : {text: {placeholder: ''}}
         api            = rmq.device.ios_at_least?(8) ? :modern : :deprecated
