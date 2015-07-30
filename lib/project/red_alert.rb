@@ -19,23 +19,17 @@ module RubyMotionQuery
         # ------------------------------------
         opts           = {message: opts} if opts.is_a? String
         opts           = {style: :alert, animated: true, show_now: true}.merge(opts)
-<<<<<<< HEAD
-        opts[:message] = opts[:message] ? opts[:message].to_s : NSLocalizedString("Alert!", nil)
-
-        style          = VALID_STYLES.include?(opts[:style]) ? opts[:style] : :alert
-        # force the style to :sheet if :popover
-        style          = :sheet if opts[:popover] and rmq.device.ipad?
-        opts[:style]   = style
-=======
-
+		# Ability to make no message
         opts[:message] = if opts.has_key?(:message)
           opts[:message].nil? ? nil : opts[:message].to_s
         else
           NSLocalizedString("Alert!", nil)
         end
 
-        opts[:style]   = VALID_STYLES.include?(opts[:style]) ? opts[:style] : :alert
->>>>>>> master
+        style          = VALID_STYLES.include?(opts[:style]) ? opts[:style] : :alert
+        # force the style to :sheet if :popover on ipad (needed for popover)
+        style          = :sheet if opts[:popover] and rmq.device.ipad?
+        opts[:style]   = style
         opts[:fields]  = opts[:style] == :custom && opts[:fields] ? opts[:fields] : {text: {placeholder: ''}}
         api            = rmq.device.ios_at_least?(8) ? :modern : :deprecated
         api            = :deprecated if rmq.device.ios_at_least?(8) && opts[:api] == :deprecated

@@ -59,14 +59,14 @@ class MainController < UIViewController
         # Text field example with :input style.
         acs.append(UIButton, :alert_controller_fields_one).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :input", style: :input) do |action_type, fields|
-            puts "you entered '#{fields[:text].text}"
+            puts "you entered '#{fields[:text].text}'"
           end
         end
 
         # Text field example with :input style and placeholder.
         acs.append(UIButton, :alert_controller_fields_two).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :input", style: :input, placeholder: "Some Placeholder") do |action_type, fields|
-            puts "you entered '#{fields[:text].text}"
+            puts "you entered '#{fields[:text].text}'"
           end
         end
 
