@@ -106,7 +106,7 @@ rmq.append(UIButton, :my_button).on(:tap) do |sender|
   rmq.app.alert(title: "Actions!", message: "Alert from a Popover.", actions: [:ok, :cancel], style:sheet, source: sender)
 end
 ```
-You can also provide a :modal option if you want the popover to be modal. This option is only available for iOS 8+.
+You can also provide a `:modal` option if you want the popover to be modal. This option is only available for iOS 8+.
 
 ## Available Templates
 
