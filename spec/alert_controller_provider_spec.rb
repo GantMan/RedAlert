@@ -104,6 +104,11 @@ describe "RubyMotionQuery" do
       Proc.new { @p.build([]) }.should.raise(ArgumentError)
     end
 
+    it "should raise an error on iPad but not on iPhone" do
+      Proc.new { @p.build([@ok], nil, style: :sheet) }.should.raise(ArgumentError) if rmq.device.ipad?
+      Proc.new { @p.build([@ok], nil, style: :sheet) }.should.not.raise(ArgumentError) if rmq.device.iphone?
+    end
+
     context 'without fields' do
 
       describe "alert controller with ok button" do
@@ -119,7 +124,7 @@ describe "RubyMotionQuery" do
       describe "alert controller with a cancel button" do
 
         before do
-          @p.build [@cancel], nil, title: "title", style: :sheet
+          @p.build [@cancel], nil, title: "title", style: :sheet, source: UIView.new
         end
 
         behaves_like "an alert controller with a cancel button"

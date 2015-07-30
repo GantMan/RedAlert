@@ -39,15 +39,15 @@ class MainController < UIViewController
 
         # Simple action sheet example.
         # OK button that doesn't care when pressed.
-        acs.append(UIButton, :alert_controller_four).on(:tap) do
-          rmq.app.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet) do |action_type|
+        acs.append(UIButton, :alert_controller_four).on(:tap) do |sender|
+          rmq.app.alert(title: "Hey there!", message: "My style is :sheet", style: :sheet, source: sender) do |action_type|
             puts "you clicked #{action_type}"
           end
         end
 
         # Sheet with no message
-        acs.append(UIButton, :alert_controller_no_message).on(:tap) do
-          rmq.app.alert(message: nil, style: :sheet, actions: :yes_no_cancel ) do |action_type|
+        acs.append(UIButton, :alert_controller_no_message).on(:tap) do |sender|
+          rmq.app.alert(message: nil, style: :sheet, actions: :yes_no_cancel, source: sender) do |action_type|
             puts "you clicked #{action_type}"
           end
         end
@@ -59,14 +59,14 @@ class MainController < UIViewController
         # Text field example with :input style.
         acs.append(UIButton, :alert_controller_fields_one).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :input", style: :input) do |action_type, fields|
-            puts "you entered '#{fields[:text].text}"
+            puts "you entered '#{fields[:text].text}'"
           end
         end
 
         # Text field example with :input style and placeholder.
         acs.append(UIButton, :alert_controller_fields_two).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :input", style: :input, placeholder: "Some Placeholder") do |action_type, fields|
-            puts "you entered '#{fields[:text].text}"
+            puts "you entered '#{fields[:text].text}'"
           end
         end
 
@@ -129,7 +129,7 @@ class MainController < UIViewController
         end
 
         # Alert example with 4 buttons, each made with `make_button` helper.
-        acs.append(UIButton, :custom_actions_helper_sheet).on(:tap) do
+        acs.append(UIButton, :custom_actions_helper_sheet).on(:tap) do |sender|
           ok = rmq.app.make_button {
             puts "OK pressed"
           }
@@ -148,7 +148,14 @@ class MainController < UIViewController
 
           button_list = [ok, yes, cancel, destructive]
 
-          rmq.app.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list, style: :sheet)
+          rmq.app.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list, style: :sheet, source: sender)
+        end
+
+        # Alert from popover
+        acs.append(UIButton, :alert_from_popover).on(:tap) do |sender|
+          label = rmq.find(:template_tour).get
+          label.sizeToFit
+          rmq.app.alert(title: "Popover", message: "Presented from popover (if iPad)", actions: [:ok], style: :sheet, source: label, arrow_direction: [:left,:right])
         end
 
         acs.append(UILabel, :template_tour)
@@ -166,8 +173,8 @@ class MainController < UIViewController
           end
         end
 
-        acs.append(UIButton, :alert_controller_yesnocancel).on(:tap) do
-          rmq.app.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet) do |title|
+        acs.append(UIButton, :alert_controller_yesnocancel).on(:tap) do |sender|
+          rmq.app.alert(message: "Would you like a sandwich?", actions: :yes_no_cancel, style: :sheet, source: sender) do |title|
             case title
             when :yes
               puts "Here's your Sandwich!"
