@@ -57,8 +57,9 @@ describe 'RedAlert' do
     before do
       wait TEST_DELAY do
         UIView.setAnimationsEnabled false
+        @view = UIView.new
         @vc = rmq.view_controller
-        @provider = rmq.app.alert(message: "hello", show_now: false, animated: false, style: :sheet, api: :deprecated)
+        @provider = rmq.app.alert(message: "hello", show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view)
       end
     end
 
@@ -70,20 +71,25 @@ describe 'RedAlert' do
       @provider.action_sheet.class.should == UIActionSheet
     end
 
+    it "should raise an error on iPad but not on iPhone" do
+      Proc.new { rmq.app.alert(style: :sheet) }.should.raise(ArgumentError) if rmq.device.ipad?
+      Proc.new { rmq.app.alert(style: :sheet) }.should.not.raise(ArgumentError) if rmq.device.iphone?
+    end
+
     it "has a valid blank title" do
-      rmq.app.alert(show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "Alert!"
+      rmq.app.alert(show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view).action_sheet.title.should == NSLocalizedString("Alert!", nil)
     end
 
     it "has a valid title when given" do
-      rmq.app.alert(title: "hi", show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "hi"
+      rmq.app.alert(title: "hi", show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view).action_sheet.title.should == "hi"
     end
 
     it "should transfer message over to title when there is no title" do
-      rmq.app.alert(message: "hi", show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "hi"
+      rmq.app.alert(message: "hi", show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view).action_sheet.title.should == "hi"
     end
 
     it "should never overwrite title with message" do
-      rmq.app.alert(title: "1", message: "2", show_now: false, animated: false, style: :sheet, api: :deprecated).action_sheet.title.should == "1"
+      rmq.app.alert(title: "1", message: "2", show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view).action_sheet.title.should == "1"
     end
 
     it "should be visible at the right time" do
@@ -167,8 +173,8 @@ describe 'RedAlert' do
       end
 
       it 'has the correct placeholder text for the change password template fields' do
-        @provider.alert_view.textFieldAtIndex(0).placeholder.should == "Current Password"
-        @provider.alert_view.textFieldAtIndex(1).placeholder.should == "New Password"
+        @provider.alert_view.textFieldAtIndex(0).placeholder.should == NSLocalizedString("Current Password", nil)
+        @provider.alert_view.textFieldAtIndex(1).placeholder.should == NSLocalizedString("New Password", nil)
       end
 
     end

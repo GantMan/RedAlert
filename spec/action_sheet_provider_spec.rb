@@ -6,6 +6,7 @@ describe "RubyMotionQuery" do
       @ok     = RubyMotionQuery::AlertAction.new(title: "OK", tag: :ok, style: :default)
       @cancel = RubyMotionQuery::AlertAction.new(title: "Cancel", tag: :cancel, style: :cancel)
       @boom   = RubyMotionQuery::AlertAction.new(title: "Boom!", tag: :boom, style: :destructive)
+      @view   = UIView.new
     end
 
     it "should prevent nil actions" do
@@ -16,10 +17,15 @@ describe "RubyMotionQuery" do
       Proc.new { @p.build([]) }.should.raise(ArgumentError)
     end
 
+    it "should raise an error on iPad but not on iPhone" do
+      Proc.new { @p.build([@ok], nil, style: :sheet) }.should.raise(ArgumentError) if rmq.device.ipad?
+      Proc.new { @p.build([@ok], nil, style: :sheet) }.should.not.raise(ArgumentError) if rmq.device.iphone?
+    end
+
     describe "action sheet with ok button" do
 
       before do
-        @p.build [@ok], nil, title: "title"
+        @p.build [@ok], nil, title: "title", source: @view
       end
 
       it "should have the right title" do
@@ -51,7 +57,7 @@ describe "RubyMotionQuery" do
     describe "action sheet with a cancel button" do
 
       before do
-        @p.build [@cancel], nil, title: "title"
+        @p.build [@cancel], nil, title: "title", source: @view
       end
 
       it "should have 1 button" do
@@ -75,7 +81,7 @@ describe "RubyMotionQuery" do
     describe "action sheet with a destructive button" do
 
       before do
-        @p.build [@boom], nil, title: "title"
+        @p.build [@boom], nil, title: "title", source: @view
       end
 
       it "should have 1 button" do

@@ -48,8 +48,9 @@ module RubyMotionQuery
       end
 
       # popover
-      if @opts[:popover] and rmq.device.ipad?
-        source = @opts[:popover]
+      if @opts[:style] == :sheet and rmq.device.ipad?
+        raise ArgumentError.new "Please provide a :source view to use :sheet on iPad" unless @opts[:source]
+        source = @opts[:source]
         @alert_controller.setModalPresentationStyle(UIModalPresentationPopover)
         if @opts[:modal]
           @alert_controller.setModalInPopover(true)

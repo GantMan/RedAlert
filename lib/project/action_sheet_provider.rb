@@ -10,6 +10,8 @@ module RubyMotionQuery
       @actions = actions
       @opts = opts
 
+      raise ArgumentError.new "Please provide a :source view to use :sheet on iPad" if rmq.device.ipad? and !@opts[:source]
+
       # grab the first cancel action
       cancel_action = actions.find { |action| action.cancel? }
 
@@ -44,8 +46,8 @@ module RubyMotionQuery
       # when we show, the view controller will disappear because a different _UIAlertOverlayWindow window will take its place
       @view_controller = rmq.view_controller
 
-      if @opts[:popover] and rmq.device.ipad?
-        source = @opts[:popover]
+      if rmq.device.ipad?
+        source = @opts[:source]
         if source.is_a?(UIBarButtonItem)
           @action_sheet.showFromBarButtonItem(source, animated: true)
         else

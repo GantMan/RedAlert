@@ -27,6 +27,9 @@ module RubyMotionQuery
         end
 
         opts[:style]   = VALID_STYLES.include?(opts[:style]) ? opts[:style] : :alert
+        if opts[:style] == :sheet and rmq.device.ipad? and opts[:source].nil?
+          raise ArgumentError.new "Please provide a :source view to use :sheet on iPad"
+        end
         opts[:fields]  = opts[:style] == :custom && opts[:fields] ? opts[:fields] : {text: {placeholder: ''}}
         api            = rmq.device.ios_at_least?(8) ? :modern : :deprecated
         api            = :deprecated if rmq.device.ios_at_least?(8) && opts[:api] == :deprecated
