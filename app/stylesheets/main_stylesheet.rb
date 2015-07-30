@@ -68,7 +68,7 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "Title and :sheet Style"
   end
 
-  def alert_controller_five st
+  def alert_controller_no_message st
     basic_button(st)
     st.text = ":sheet Style with no message"
   end
