@@ -63,29 +63,36 @@ class MainController < UIViewController
           end
         end
 
-        # Text field example with :secure style.
+        # Text field example with :input style and placeholder.
         acs.append(UIButton, :alert_controller_fields_two).on(:tap) do
+          rmq.app.alert(title: "Text Field", message: "My style is :input", style: :input, placeholder: "Some Placeholder") do |action_type, fields|
+            puts "you entered '#{fields[:text].text}"
+          end
+        end
+
+        # Text field example with :secure style.
+        acs.append(UIButton, :alert_controller_fields_three).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :secure", style: :secure) do |action_type, fields|
             puts "you entered '#{fields[:text].text}'"
           end
         end
 
         # Text field example with :login style.
-        acs.append(UIButton, :alert_controller_fields_three).on(:tap) do
+        acs.append(UIButton, :alert_controller_fields_four).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :login", style: :login) do |action_type, fields|
             puts "you entered '#{fields[:login].text}' as the login and '#{fields[:password].text}' as the password"
           end
         end
 
         # Text field example with :change_password style.
-        acs.append(UIButton, :alert_controller_fields_four).on(:tap) do
+        acs.append(UIButton, :alert_controller_fields_five).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :change_password", style: :change_password) do |action_type, fields|
             puts "you entered '#{fields[:current_password].text}' as the current password and '#{fields[:new_password].text}' as the new password"
           end
         end
 
         # Text field example with :custom style.
-        acs.append(UIButton, :alert_controller_fields_five).on(:tap) do
+        acs.append(UIButton, :alert_controller_fields_six).on(:tap) do
           rmq.app.alert(title: "Text Field", message: "My style is :custom", style: :custom, fields:
                        {phone: {placeholder: 'Phone', keyboard_type: :phone_pad},
                         email: {placeholder: 'Email', secure: false, keyboard_type: :email_address}}) do |action_type, fields|
