@@ -153,7 +153,9 @@ class MainController < UIViewController
 
         # Alert from popover
         acs.append(UIButton, :alert_from_popover).on(:tap) do |sender|
-          rmq.app.alert(title: "Popover", message: "Presented from popover (if iPad)", actions: [:ok], style: :sheet, source: sender)
+          label = rmq.find(:template_tour).get
+          label.sizeToFit
+          rmq.app.alert(title: "Popover", message: "Presented from popover (if iPad)", actions: [:ok], style: :sheet, source: label, arrow_direction: [:left,:right])
         end
 
         acs.append(UILabel, :template_tour)

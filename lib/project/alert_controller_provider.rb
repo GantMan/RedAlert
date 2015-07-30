@@ -61,6 +61,18 @@ module RubyMotionQuery
           @alert_controller.popoverPresentationController.sourceView = source
         end
         @alert_controller.popoverPresentationController.sourceRect = source.bounds
+
+        if @opts[:arrow_direction]
+          directions = @opts[:arrow_direction]
+          unless directions.is_a?(Array)
+            directions = [directions]
+          end
+          arrow_direction = 0
+          directions.each do |direction|
+            arrow_direction |= RubyMotionQuery::AlertConstants::ALERT_POPOVER_ARROW_DIRECTION[direction]
+          end
+          @alert_controller.popoverPresentationController.permittedArrowDirections = arrow_direction
+        end
       end
 
       self
