@@ -14,6 +14,12 @@ describe "RubyMotionQuery::App" do
         field.placeholder.should == ""
       end
 
+      it "should have a placeholder when specified" do
+        a = RubyMotionQuery::App.add_template_fieldset(:input, {placeholder: "test placeholder"})
+        field = a[:fields].first
+        field.placeholder.should == "test placeholder"
+      end
+
     end
 
     describe ":secure" do
@@ -29,6 +35,12 @@ describe "RubyMotionQuery::App" do
         field.placeholder.should == ""
       end
 
+      it "should have a placeholder when specified" do
+        a = RubyMotionQuery::App.add_template_fieldset(:secure, {placeholder: "secure test placeholder"})
+        field = a[:fields].first
+        field.placeholder.should == "secure test placeholder"
+      end
+
     end
 
     describe ":login" do
@@ -42,11 +54,11 @@ describe "RubyMotionQuery::App" do
         login.name.should == :login
         login.keyboard_type.should == :email_address
         login.secure_text_entry.should == false
-        login.placeholder.should == "Login"
+        login.placeholder.should == NSLocalizedString("Login", nil)
         password.name.should == :password
         password.keyboard_type.should == :default
         password.secure_text_entry.should == true
-        password.placeholder.should == "Password"
+        password.placeholder.should == NSLocalizedString("Password", nil)
       end
 
     end
@@ -62,11 +74,11 @@ describe "RubyMotionQuery::App" do
         current_password.name.should == :current_password
         current_password.keyboard_type.should == :default
         current_password.secure_text_entry.should == true
-        current_password.placeholder.should == "Current Password"
+        current_password.placeholder.should == NSLocalizedString("Current Password", nil)
         new_password.name.should == :new_password
         new_password.keyboard_type.should == :default
         new_password.secure_text_entry.should == true
-        new_password.placeholder.should == "New Password"
+        new_password.placeholder.should == NSLocalizedString("New Password", nil)
       end
 
     end

@@ -68,6 +68,11 @@ class MainStylesheet < ApplicationStylesheet
     st.text = "Title and :sheet Style"
   end
 
+  def alert_controller_no_message st
+    basic_button(st)
+    st.text = ":sheet Style with no message"
+  end
+
   def alert_controller_fields_one st
     basic_button(st)
     st.text = "Fields :input Style"
@@ -75,20 +80,25 @@ class MainStylesheet < ApplicationStylesheet
 
   def alert_controller_fields_two st
     basic_button(st)
-    st.text = "Fields :secure Style"
+    st.text = "Fields :input w/ placeholder"
   end
 
   def alert_controller_fields_three st
     basic_button(st)
-    st.text = "Fields :login Style"
+    st.text = "Fields :secure Style"
   end
 
   def alert_controller_fields_four st
     basic_button(st)
-    st.text = "Fields :change_password Style"
+    st.text = "Fields :login Style"
   end
 
   def alert_controller_fields_five st
+    basic_button(st)
+    st.text = "Fields :change_password Style"
+  end
+
+  def alert_controller_fields_six st
     basic_button(st)
     st.text = "Fields :custom Style"
   end
@@ -105,7 +115,7 @@ class MainStylesheet < ApplicationStylesheet
 
   def alert_from_popover st
     basic_button(st)
-    st.text = "Alert From Popover"
+    st.text = "Alert From Popover on iPad"
   end
 
   def usage_tour st

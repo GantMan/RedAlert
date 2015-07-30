@@ -46,6 +46,10 @@ describe 'RedAlert' do
       @provider.alert_controller.message.should == "hello"
     end
 
+    it "allows an empty message" do
+      @provider = rmq.app.alert(message: nil, show_now: false, animated: false)
+      @provider.alert_controller.message.should == nil
+    end
   end
 
   describe "UIActionSheet Hosted" do

@@ -17,3 +17,4 @@ nbproject
 .idea
 .dat*.*
 Gemfile.lock
+.ruby-version
