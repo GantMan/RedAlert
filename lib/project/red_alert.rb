@@ -19,7 +19,7 @@ module RubyMotionQuery
         # ------------------------------------
         opts           = {message: opts} if opts.is_a? String
         opts           = {style: :alert, animated: true, show_now: true}.merge(opts)
-
+		# Ability to make no message
         opts[:message] = if opts.has_key?(:message)
           opts[:message].nil? ? nil : opts[:message].to_s
         else
