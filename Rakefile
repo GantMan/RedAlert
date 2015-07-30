@@ -14,4 +14,5 @@ Motion::Project::App.setup do |app|
   app.identifier = 'com.gantlaborde.red_alert'
   app.name = 'RedAlert'
   app.deployment_target = ENV["DEPLOYMENT_TARGET"] if ENV["DEPLOYMENT_TARGET"]
+  app.device_family = [:iphone, :ipad]
 end

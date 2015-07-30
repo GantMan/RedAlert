@@ -99,6 +99,20 @@ You can even use the `make_button` helper to create custom buttons to add:
   rmq.app.alert(title: "Actions!", message: "Actions created with `make_button` helper.", actions: button_list)
 ```
 
+
+If you want to present your alert in :sheet style and you are on iPad, you have to provide the `:source` for the popover (either a UIView or a UIBarButtonItem)
+```ruby
+rmq.append(UIButton, :my_button).on(:tap) do |sender|
+  rmq.app.alert(title: "Actions!", message: "Alert from a Popover.", actions: [:ok, :cancel], style:sheet, source: sender)
+end
+```
+
+*iOS 8+ options*
+These options work only on iOS 8+
+* `:modal` will prevent the popover to be close by tapping outside the popover
+* `:arrow_direction` will force the direction of the popover arrow. Valid values are `:up`, `:down`, `:left`, `:right` or `:any`
+
+
 ## Available Templates
 
 Button templates are provided [HERE](https://github.com/GantMan/RedAlert/blob/master/lib/project/button_templates.rb)

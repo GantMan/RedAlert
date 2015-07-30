@@ -1,10 +1,10 @@
 "Yes" = "Oui";
-"No" = "Pas";
+"No" = "Non";
 "Cancel" = "Annuler";
 "OK" = "OK";
 "Delete" = "Effacer";
 "Alert!" = "Alerte!";
-"Login" = "S'identifier";
+"Login" = "Identifiant";
 "Password" = "Mot De Passe";
 "Current Password" = "Mot De Passe Actuel";
 "New Password" = "Nouveau Mot De Passe";

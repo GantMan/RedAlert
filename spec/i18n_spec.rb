@@ -87,7 +87,7 @@ describe 'RedAlert' do
       end
 
       it "should have an english No button" do
-        @ac.actions[1].title.should == "Pas"
+        @ac.actions[1].title.should == "Non"
       end
 
       it "should have an english Cancel button" do
@@ -95,7 +95,7 @@ describe 'RedAlert' do
       end
 
       it 'should have French placeholder text for the first field' do
-        @ac.textFields[0].placeholder.should == "S'identifier"
+        @ac.textFields[0].placeholder.should == "Identifiant"
       end
 
       it 'should have French placeholder text for the second field' do

@@ -12,5 +12,13 @@ module RubyMotionQuery
       destructive: UIAlertActionStyleDestructive
     }
 
+    ALERT_POPOVER_ARROW_DIRECTION = {
+      up: UIPopoverArrowDirectionUp,
+      down: UIPopoverArrowDirectionDown,
+      left: UIPopoverArrowDirectionLeft,
+      right: UIPopoverArrowDirectionRight,
+      any: UIPopoverArrowDirectionAny
+    }
+
   end
 end
