@@ -115,7 +115,7 @@ class MainStylesheet < ApplicationStylesheet
 
   def alert_from_popover st
     basic_button(st)
-    st.text = "Alert From Popover"
+    st.text = "Alert From Popover on iPad"
   end
 
   def usage_tour st
