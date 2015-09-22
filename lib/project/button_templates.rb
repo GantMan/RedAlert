@@ -8,11 +8,11 @@ module RubyMotionQuery
 
 
     def self.add_template_actions(template, &block)
-      yes    = NSLocalizedString("Yes", nil)
-      no     = NSLocalizedString("No", nil)
-      cancel = NSLocalizedString("Cancel", nil)
-      ok     = NSLocalizedString("OK", nil)
-      delete = NSLocalizedString("Delete", nil)
+      yes    = "Yes" #NSLocalizedString("Yes", nil)
+      no     = "No" #NSLocalizedString("No", nil)
+      cancel = "Cancel" #NSLocalizedString("Cancel", nil)
+      ok     = "OK" #NSLocalizedString("OK", nil)
+      delete = "Delete" #NSLocalizedString("Delete", nil)
 
       case template
       when :yes_no
