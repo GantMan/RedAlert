@@ -10,7 +10,7 @@ module RubyMotionQuery
 
     def initialize(opts = {}, &block)
       opts     = {title: opts} if opts.is_a? String
-      @title   = opts[:title] || NSLocalizedString("OK", nil)
+      @title   = opts[:title] || "OK" || NSLocalizedString("OK", nil)
       @tag     = opts[:tag] || @title.gsub(/\s+/,"_").downcase.to_sym
       @style   = VALID_STYLES.include?(opts[:style]) ? opts[:style] : VALID_STYLES.first
       @handler = block if block_given?

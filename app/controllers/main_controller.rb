@@ -156,7 +156,7 @@ class MainController < UIViewController
           label = rmq.find(:template_tour).get
           label.sizeToFit
           rmq.app.alert(title: "Popover", message: "Presented from popover (if iPad)", actions: [:ok], style: :sheet, source: label, arrow_direction: [:left,:right])
-        end
+        end if rmq.device.ipad?
 
         acs.append(UILabel, :template_tour)
 
