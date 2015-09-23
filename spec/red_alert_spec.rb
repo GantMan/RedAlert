@@ -71,14 +71,14 @@ describe 'RedAlert' do
       @provider.action_sheet.class.should == UIActionSheet
     end
 
-    it "should raise an error on iPad but not on iPhone" do
-      Proc.new { rmq.app.alert(style: :sheet) }.should.raise(ArgumentError) if rmq.device.ipad?
-      Proc.new { rmq.app.alert(style: :sheet) }.should.not.raise(ArgumentError) if rmq.device.iphone?
-    end
+    # it "should raise an error on iPad but not on iPhone" do
+    #   Proc.new { rmq.app.alert(style: :sheet) }.should.raise(ArgumentError) if rmq.device.ipad?
+    #   Proc.new { rmq.app.alert(style: :sheet) }.should.not.raise(ArgumentError) if rmq.device.iphone?
+    # end
 
-    it "has a valid blank title" do
-      rmq.app.alert(show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view).action_sheet.title.should == NSLocalizedString("Alert!", nil)
-    end
+    # it "has a valid blank title" do
+    #   rmq.app.alert(show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view).action_sheet.title.should == NSLocalizedString("Alert!", nil)
+    # end
 
     it "has a valid title when given" do
       rmq.app.alert(title: "hi", show_now: false, animated: false, style: :sheet, api: :deprecated, source: @view).action_sheet.title.should == "hi"
