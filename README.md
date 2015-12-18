@@ -103,7 +103,7 @@ You can even use the `make_button` helper to create custom buttons to add:
 If you want to present your alert in :sheet style and you are on iPad, you have to provide the `:source` for the popover (either a UIView or a UIBarButtonItem)
 ```ruby
 rmq.append(UIButton, :my_button).on(:tap) do |sender|
-  rmq.app.alert(title: "Actions!", message: "Alert from a Popover.", actions: [:ok, :cancel], style:sheet, source: sender)
+  rmq.app.alert(title: "Actions!", message: "Alert from a Popover.", actions: [:ok, :cancel], style: :sheet, source: sender)
 end
 ```
 
