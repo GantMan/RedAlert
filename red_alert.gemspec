@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-VERSION = "1.4"
+VERSION = "1.5"
 
 Gem::Specification.new do |spec|
   spec.name          = "RedAlert"
