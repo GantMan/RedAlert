@@ -79,7 +79,8 @@ module RubyMotionQuery
     end
 
     def show
-      rmq.view_controller.presentViewController(@alert_controller, animated: @opts[:animated], completion: nil)
+      view_controller = rmq.view_controller.childModalViewController || rmq.view_controller
+      view_controller.presentViewController(@alert_controller, animated: @opts[:animated], completion: nil)
     end
 
   end
