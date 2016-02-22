@@ -9,8 +9,8 @@ before_install:
 gemfile:
   - Gemfile
 script:
-  - /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/simctl create air com.apple.CoreSimulator.SimDeviceType.iPad-Air com.apple.CoreSimulator.SimRuntime.iOS-8-1
+  # - /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/simctl create air com.apple.CoreSimulator.SimDeviceType.iPad-Air com.apple.CoreSimulator.SimRuntime.iOS-8-1
   - bundle install
   - bundle exec rake clean
   - bundle exec rake spec
-  - bundle exec rake spec device_name=air
+  # - bundle exec rake spec device_name=air
