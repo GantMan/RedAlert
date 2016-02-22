@@ -34,6 +34,7 @@ module RubyMotionQuery
         fieldset[:fields].each_with_index do |field, index|
           text_field = @alert_view.textFieldAtIndex index
           text_field.placeholder = field.placeholder
+          text_field.text = field.text
           text_field.secureTextEntry = field.secure_text_entry
           text_field.keyboardType = RubyMotionQuery::Stylers::KEYBOARD_TYPES[field.keyboard_type]
           @text_fields[field.name] = text_field
