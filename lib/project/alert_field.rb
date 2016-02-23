@@ -3,6 +3,7 @@ module RubyMotionQuery
 
     attr_accessor :keyboard_type
     attr_accessor :placeholder
+    attr_accessor :text
     attr_accessor :secure_text_entry
     attr_accessor :name
 
@@ -12,6 +13,7 @@ module RubyMotionQuery
       @name               = name.is_a?(Symbol) ? name : name.strip.gsub(/\s+/,'_').to_sym
       @keyboard_type      = RubyMotionQuery::Stylers::KEYBOARD_TYPES.has_key?(opts[:keyboard_type]) ? opts[:keyboard_type] : :default
       @placeholder        = opts[:placeholder] || ''
+      @text               = opts[:text] || ''
       @secure_text_entry  = opts[:secure_text_entry] || false
     end
   end

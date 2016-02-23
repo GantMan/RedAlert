@@ -20,6 +20,7 @@ module RubyMotionQuery
         fieldset[:fields].each_with_index do |field, index|
           handler = lambda do |text_field|
             text_field.placeholder = field.placeholder if field.placeholder.is_a? String
+            text_field.text = field.text if field.text.is_a? String
             text_field.secureTextEntry = field.secure_text_entry if field.secure_text_entry.is_a? String
             text_field.keyboardType = RubyMotionQuery::Stylers::KEYBOARD_TYPES[field.keyboard_type]
           end

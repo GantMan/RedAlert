@@ -50,6 +50,18 @@ describe "AlertField" do
 
   end
 
+  describe "#text" do
+
+    it "should use the text option if provided" do
+      af.new(:name, text: "Gant").text.should == "Gant"
+    end
+
+    it "should set the text to an empty stringif not provided" do
+      af.new(:name).text.should == ""
+    end
+
+  end
+
   describe "#secure_text_entry" do
 
     it "should default to false" do

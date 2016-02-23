@@ -85,20 +85,25 @@ class MainStylesheet < ApplicationStylesheet
 
   def alert_controller_fields_three st
     basic_button(st)
-    st.text = "Fields :secure Style"
+    st.text = "Fields :input w/ text"
   end
 
   def alert_controller_fields_four st
     basic_button(st)
-    st.text = "Fields :login Style"
+    st.text = "Fields :secure Style"
   end
 
   def alert_controller_fields_five st
     basic_button(st)
-    st.text = "Fields :change_password Style"
+    st.text = "Fields :login Style"
   end
 
   def alert_controller_fields_six st
+    basic_button(st)
+    st.text = "Fields :change_password Style"
+  end
+
+  def alert_controller_fields_seven st
     basic_button(st)
     st.text = "Fields :custom Style"
   end

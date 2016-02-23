@@ -55,6 +55,12 @@ Add the **RedAlert** gem to your Gemfile.
     puts "you entered '#{fields[:login].text}' as the login and '#{fields[:password].text}' as the password"
   end
 
+  # Pre-fill text into an input field
+  rmq.app.alert(title: "Text Field", message: "My style is :input", style: :input, text: "Some Text", placeholder: "Some Placeholder") do |action_type, fields|
+    puts "you entered '#{fields[:text].text}'"
+  end
+
+
   # Add input fields with settings for placeholder text, whether the field is secure, and the keyboard type by setting the style to :custom
   rmq.app.alert(title: "Text Field", message: "My style is :custom", style: :custom, fields:
                {phone: {placeholder: 'Phone', keyboard_type: :phone_pad},

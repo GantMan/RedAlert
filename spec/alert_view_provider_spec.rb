@@ -4,6 +4,7 @@ describe "RubyMotionQuery" do
     before do
       @p      = RubyMotionQuery::AlertViewProvider.new
       @fieldset = {alert_view_style: UIAlertViewStylePlainTextInput, fields: [RubyMotionQuery::AlertField.new(:text)]}
+      @placeholder_fieldset = {alert_view_style: UIAlertViewStylePlainTextInput, fields: [RubyMotionQuery::AlertField.new(:text, {placeholder: "placeholder", text: "text"})]}
       @ok     = RubyMotionQuery::AlertAction.new(title: "OK", tag: :ok, style: :default)
       @cancel = RubyMotionQuery::AlertAction.new(title: "Cancel", tag: :cancel, style: :cancel)
       @boom   = RubyMotionQuery::AlertAction.new(title: "Boom!", tag: :boom, style: :destructive)
@@ -77,6 +78,26 @@ describe "RubyMotionQuery" do
 
       it 'has a text field with an empty placeholder' do
         @p.alert_view.textFieldAtIndex(0).placeholder.should == nil
+      end
+
+      it 'has a text field with an empty text' do
+        @p.alert_view.textFieldAtIndex(0).text.should == ""
+      end
+
+    end
+
+    shared "an alert view with a placeholder" do
+
+      it 'has a placeholder' do
+        @p.alert_view.textFieldAtIndex(0).placeholder.should == "placeholder"
+      end
+
+    end
+
+    shared "an alert view with text pre-set" do
+
+      it 'has text' do
+        @p.alert_view.textFieldAtIndex(0).text.should == "text"
       end
 
     end
@@ -156,6 +177,16 @@ describe "RubyMotionQuery" do
         behaves_like "an alert view with a destructive button"
         behaves_like "an alert view with one field"
 
+      end
+
+      describe "an alert view with placeholder and text" do
+
+        before do
+          @p.build [@boom], @placeholder_fieldset, title: "title"
+        end
+
+        behaves_like "an alert view with a placeholder"
+        behaves_like "an alert view with text pre-set"
       end
     end
 

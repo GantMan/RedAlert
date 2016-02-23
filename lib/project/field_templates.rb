@@ -19,7 +19,7 @@ module RubyMotionQuery
           fieldset[:alert_view_style] = UIAlertViewStylePlainTextInput
           fieldset[:fields] =
           [
-            rmq.app.make_field(:text, keyboard_type: :default, secure_text_entry: false, placeholder: opts.fetch(:placeholder,''))
+            rmq.app.make_field(:text, keyboard_type: :default, secure_text_entry: false, placeholder: opts.fetch(:placeholder,''), text: opts.fetch(:text,''))
           ]
         when :secure
           fieldset[:alert_view_style] = UIAlertViewStyleSecureTextInput
