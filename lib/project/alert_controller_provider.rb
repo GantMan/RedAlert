@@ -60,8 +60,8 @@ module RubyMotionQuery
           @alert_controller.popoverPresentationController.barButtonItem = source
         else
           @alert_controller.popoverPresentationController.sourceView = source
+          @alert_controller.popoverPresentationController.sourceRect = source.bounds
         end
-        @alert_controller.popoverPresentationController.sourceRect = source.bounds
 
         if @opts[:arrow_direction]
           directions = @opts[:arrow_direction]
