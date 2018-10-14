@@ -23,7 +23,7 @@ module RubyMotionQuery
         opts[:message] = if opts.has_key?(:message)
           opts[:message].nil? ? nil : opts[:message].to_s
         else
-          NSLocalizedString("Alert!", nil)
+          nil
         end
 
 
